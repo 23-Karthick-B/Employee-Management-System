@@ -1,5 +1,8 @@
 package com.employee.backend.service;
 
-public class EmployeeService {
+import com.employee.backend.dto.EmployeeDto;
+
+public interface EmployeeService {
+    String createEmployee(EmployeeDto dto);
 
 }
