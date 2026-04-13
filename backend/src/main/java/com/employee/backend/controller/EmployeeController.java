@@ -1,5 +1,7 @@
 package com.employee.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,17 +21,22 @@ public class EmployeeController {
     private EmployeeService service;
 
     @PostMapping("/create")
-    public String create(@RequestBody EmployeeDto dto){
+    public EmployeeDto create(@RequestBody EmployeeDto dto){
         return service.createEmployee(dto);
     }
 
     @GetMapping
-    public String getAllEmployee(){
+    public List<EmployeeDto> getAllEmployee(){
         return service.getAllEmployee();
     }
 
     @GetMapping("/{id}")
-    public String getEmployeeById(@PathVariable Long id){
+    public EmployeeDto getEmployeeById(@PathVariable Long id){
         return service.getEmployeeById(id);
     }
+    @GetMapping("/department/{dept}")
+    public List<EmployeeDto> getEmployeeByDept(@PathVariable String dept){
+        return service.getEmployeeByDept(dept);
+    }
+
 }

@@ -1,11 +1,14 @@
 package com.employee.backend.service;
 
+import java.util.List;
+
 import com.employee.backend.dto.EmployeeDto;
 
 public interface EmployeeService {
-    String createEmployee(EmployeeDto dto);
+    EmployeeDto createEmployee(EmployeeDto dto);
 
-    String getAllEmployee();
-    String getEmployeeById(Long id);
+    List<EmployeeDto> getAllEmployee();
+    EmployeeDto getEmployeeById(Long id);
+    List<EmployeeDto> getEmployeeByDept(String dept);
 
 }

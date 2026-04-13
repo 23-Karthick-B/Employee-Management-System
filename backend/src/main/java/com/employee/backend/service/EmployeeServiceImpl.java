@@ -1,6 +1,8 @@
 package com.employee.backend.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -14,23 +16,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     private Long idCounter = 1L;
 
     @Override
-    public String createEmployee(EmployeeDto dto){
+    public EmployeeDto createEmployee(EmployeeDto dto){
         mockDb.put(idCounter++, dto);
-        return "Employee created " + dto.name;
+        return dto;
     }
+
     @Override
-    public String getAllEmployee(){
-        return mockDb.values().toString();
+    public List<EmployeeDto> getAllEmployee(){
+        return new ArrayList<>(mockDb.values());
 
     }
 
     @Override
-    public String getEmployeeById(Long id){
+    public EmployeeDto getEmployeeById(Long id){
         EmployeeDto dto = mockDb.get(id);
         if (dto == null){
-            return "Employee not Found with the id";
+            throw new RuntimeException("Employee not found!!");
         }
-        return dto.toString();
+        return dto;
+    }
+
+    @Override
+    public List<EmployeeDto> getEmployeeByDept(String dept){
+        List<EmployeeDto> result = new ArrayList<>();
+        for(EmployeeDto emp : mockDb.values()){
+            if(emp.getDepartment().equalsIgnoreCase(dept)){
+                result.add(emp);
+            }
+        }
+        return result;
     }
 
 }
