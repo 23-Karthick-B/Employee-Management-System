@@ -47,4 +47,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         return result;
     }
 
+    @Override
+    public EmployeeDto updateEmployee(Long id, EmployeeDto dto){
+
+        EmployeeDto current = mockDb.get(id);
+        if (current == null){
+            throw new RuntimeException("Employee not found !!!");
+
+        }
+        current.setName(dto.getName());
+        current.setEmail(dto.getEmail());
+        current.setDepartment(dto.getDepartment());
+        return current;
+    }
+
 }
