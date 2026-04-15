@@ -17,6 +17,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
+        for(EmployeeDto emp : mockDb.values()){
+            if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){
+                throw new RuntimeException("Employee already exists!!!");            }
+        }
         dto.setId(idCounter);
         mockDb.put(idCounter, dto);
         idCounter++;
@@ -38,19 +42,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dto;
     }
 
-
     @Override
-    public EmployeeDto updateEmployee(Long id, EmployeeDto dto){
+    public EmployeeDto updateEmployee(Long id, EmployeeDto dto) {
 
         EmployeeDto current = mockDb.get(id);
-        if (current == null){
+        if (current == null) {
             throw new RuntimeException("Employee not found !!!");
+        }
 
+        for (Map.Entry<Long, EmployeeDto> entry : mockDb.entrySet()) {
+
+            Long keyid = entry.getKey();
+            EmployeeDto emp = entry.getValue();
+
+            if (!keyid.equals(id) && emp.getEmail().equalsIgnoreCase(dto.getEmail())) {
+
+                throw new RuntimeException("Email already exists!!!");
+            }
         }
         current.setName(dto.getName());
         current.setEmail(dto.getEmail());
         current.setDepartment(dto.getDepartment());
-        
+
         return current;
     }
 

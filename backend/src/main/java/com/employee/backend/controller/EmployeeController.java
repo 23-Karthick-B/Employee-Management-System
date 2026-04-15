@@ -23,12 +23,14 @@ public class EmployeeController {
     @Autowired
     private EmployeeService service;
 
-    @PostMapping("/create")
+    // Basic CRUD API's
+
+    @PostMapping("/employees")
     public EmployeeDto create(@RequestBody EmployeeDto dto){
         return service.createEmployee(dto);
     }
 
-    @GetMapping
+    @GetMapping("/employees")
     public List<EmployeeDto> getAllEmployee(){
         return service.getAllEmployee();
     }
@@ -47,6 +49,8 @@ public class EmployeeController {
     public String deleteEmployee(@PathVariable Long id){
         return service.deleteEmployee(id);
     }
+
+    // Search API's
 
     @GetMapping("/employees/search")
     public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
