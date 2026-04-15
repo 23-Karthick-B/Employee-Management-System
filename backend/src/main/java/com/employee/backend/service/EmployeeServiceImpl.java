@@ -62,4 +62,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return current;
     }
 
+    @Override
+    public String deleteEmployee(Long id){
+
+        EmployeeDto current = mockDb.get(id);
+        if (current == null){
+            throw new RuntimeException("Employee Not Found!!!");
+        }
+        mockDb.remove(id);
+        return "Employee deleted with id " + id;
+    }
+
 }

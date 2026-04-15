@@ -3,6 +3,7 @@ package com.employee.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +44,10 @@ public class EmployeeController {
     @PutMapping("/employee/{id}")
     public EmployeeDto updateEmployee(@PathVariable Long id,@RequestBody EmployeeDto dto){
         return service.updateEmployee(id, dto);
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public String deleteEmployee(@PathVariable Long id){
+        return service.deleteEmployee(id);
     }
 }
