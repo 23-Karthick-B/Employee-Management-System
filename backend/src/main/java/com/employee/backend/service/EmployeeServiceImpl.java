@@ -17,7 +17,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
-        mockDb.put(idCounter++, dto);
+        dto.setId(idCounter);
+        mockDb.put(idCounter, dto);
+        idCounter++;
         return dto;
     }
 
