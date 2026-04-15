@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.backend.dto.EmployeeDto;
@@ -32,22 +33,24 @@ public class EmployeeController {
         return service.getAllEmployee();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/employees/{id}")
     public EmployeeDto getEmployeeById(@PathVariable Long id){
         return service.getEmployeeById(id);
     }
-    @GetMapping("/department/{dept}")
-    public List<EmployeeDto> getEmployeeByDept(@PathVariable String dept){
-        return service.getEmployeeByDept(dept);
-    }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/employees/{id}")
     public EmployeeDto updateEmployee(@PathVariable Long id,@RequestBody EmployeeDto dto){
         return service.updateEmployee(id, dto);
     }
 
-    @DeleteMapping("/employee/{id}")
+    @DeleteMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable Long id){
         return service.deleteEmployee(id);
+    }
+
+    @GetMapping("/employees/search")
+    public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
+        return service.searchEmployees(name, dept);
+
     }
 }

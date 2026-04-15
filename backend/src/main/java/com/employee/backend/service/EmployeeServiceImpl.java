@@ -38,16 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dto;
     }
 
-    @Override
-    public List<EmployeeDto> getEmployeeByDept(String dept){
-        List<EmployeeDto> result = new ArrayList<>();
-        for(EmployeeDto emp : mockDb.values()){
-            if(emp.getDepartment().equalsIgnoreCase(dept)){
-                result.add(emp);
-            }
-        }
-        return result;
-    }
 
     @Override
     public EmployeeDto updateEmployee(Long id, EmployeeDto dto){
@@ -73,6 +63,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         mockDb.remove(id);
         return "Employee deleted with id " + id;
+    }
+
+    @Override
+    public List<EmployeeDto> searchEmployees(String name,String dept){
+        List<EmployeeDto> searchList = new ArrayList<>();
+        for (EmployeeDto emp: mockDb.values()){
+            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name));
+            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept));
+            if (matchName && matchDept){
+                searchList.add(emp);
+            }
+        }
+        return searchList;
     }
 
 }
