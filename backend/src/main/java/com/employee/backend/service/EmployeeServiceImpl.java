@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.exception.DuplicateEmailException;
+import com.employee.backend.exception.ResourceNotFoundException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -20,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto createEmployee(EmployeeDto dto){
         for(EmployeeDto emp : mockDb.values()){
             if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){
-                throw new DuplicateEmailException("Employee already exists!!!");            }
+                throw new DuplicateEmailException("Email already exists!!!");            }
         }
         dto.setId(idCounter);
         dto.setActive(true);
@@ -39,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto getEmployeeById(Long id){
         EmployeeDto dto = mockDb.get(id);
         if (dto == null || !dto.isActive()){
-            throw new RuntimeException("Employee not found!!");
+            throw new ResourceNotFoundException("Employee not found!!");
         }
         return dto;
     }
@@ -49,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         EmployeeDto current = mockDb.get(id);
         if (current == null) {
-            throw new RuntimeException("Employee not found !!!");
+            throw new ResourceNotFoundException("Employee not found !!!");
         }
 
         for (Map.Entry<Long, EmployeeDto> entry : mockDb.entrySet()) {
@@ -74,7 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         EmployeeDto current = mockDb.get(id);
         if (current == null){
-            throw new RuntimeException("Employee Not Found!!!");
+            throw new ResourceNotFoundException("Employee Not Found!!!");
         }
         current.setActive(false);
 

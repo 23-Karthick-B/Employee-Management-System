@@ -21,4 +21,10 @@ public class GlobalException {
         );
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponseDto handleNotFound(ResourceNotFoundException ex){
+        return new ErrorResponseDto(404, ex.getMessage(), LocalTime.now().toString());
+    }
+
 }
