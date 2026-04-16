@@ -22,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 throw new RuntimeException("Employee already exists!!!");            }
         }
         dto.setId(idCounter);
+        dto.setActive(true);
         mockDb.put(idCounter, dto);
         idCounter++;
         return dto;
@@ -36,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto getEmployeeById(Long id){
         EmployeeDto dto = mockDb.get(id);
-        if (dto == null){
+        if (dto == null || !dto.isActive()){
             throw new RuntimeException("Employee not found!!");
         }
         return dto;
@@ -74,7 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (current == null){
             throw new RuntimeException("Employee Not Found!!!");
         }
-        mockDb.remove(id);
+        current.setActive(false);
+
         return "Employee deleted with id " + id;
     }
 
@@ -84,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         for (EmployeeDto emp: mockDb.values()){
             boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name));
             boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept));
-            if (matchName && matchDept){
+            if (matchName && matchDept && emp.isActive()){
                 searchList.add(emp);
             }
         }

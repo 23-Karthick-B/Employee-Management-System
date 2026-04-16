@@ -6,7 +6,8 @@ public class EmployeeDto {
     private String name;
     private String email;
     private String department;
-    
+    private boolean isActive;
+
     public Long getId() {
         return id;
     }
@@ -31,5 +32,12 @@ public class EmployeeDto {
     }
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
