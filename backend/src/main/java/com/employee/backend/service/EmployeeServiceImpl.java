@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
+import com.employee.backend.exception.DuplicateEmailException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -19,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto createEmployee(EmployeeDto dto){
         for(EmployeeDto emp : mockDb.values()){
             if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){
-                throw new RuntimeException("Employee already exists!!!");            }
+                throw new DuplicateEmailException("Employee already exists!!!");            }
         }
         dto.setId(idCounter);
         dto.setActive(true);
@@ -58,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             if (!keyid.equals(id) && emp.getEmail().equalsIgnoreCase(dto.getEmail())) {
 
-                throw new RuntimeException("Email already exists!!!");
+                throw new DuplicateEmailException("Email already exists!!!");
             }
         }
         current.setName(dto.getName());
