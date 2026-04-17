@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
         for(EmployeeDto emp : mockDb.values()){
-            if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){
+            if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){// Instead of using twice .toLower()
                 throw new DuplicateEmailException("Email already exists!!!");            }
         }
         dto.setId(idCounter);
@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto getEmployeeById(Long id){
         EmployeeDto dto = mockDb.get(id);
-        if (dto == null || !dto.isActive()){
+        if (dto == null || !dto.isActive()){ // To verify that isActive is false
             throw new ResourceNotFoundException("Employee not found!!");
         }
         return dto;
@@ -86,9 +86,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> searchEmployees(String name,String dept){
         List<EmployeeDto> searchList = new ArrayList<>();
         for (EmployeeDto emp: mockDb.values()){
-            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name));
-            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept));
-            if (matchName && matchDept && emp.isActive()){
+            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
+            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
+            if (matchName && matchDept && emp.isActive()){ // Checking isActive()
                 searchList.add(emp);
             }
         }
