@@ -42,7 +42,6 @@ public class Employee {
 
     @Column(name = "UpdatedAt")
     private LocalDateTime updatedAt;
-    
 
     public Integer getId() {
         return id;
@@ -115,5 +114,23 @@ public class Employee {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String email, String department, String phoneNumber, LocalDate dod,
+            Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.department = department;
+        this.phoneNumber = phoneNumber;
+        this.dod = dod;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    
 
 }

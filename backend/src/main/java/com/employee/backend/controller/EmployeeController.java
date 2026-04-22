@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.backend.dto.EmployeeDto;
+import com.employee.backend.entity.Employee;
 import com.employee.backend.service.EmployeeService;
 
 @RestController
@@ -26,27 +27,27 @@ public class EmployeeController {
     // Basic CRUD API's
 
     @PostMapping("/employees")
-    public EmployeeDto create(@RequestBody EmployeeDto dto){
-        return service.createEmployee(dto);
+    public Employee create(@RequestBody Employee emp){
+        return service.createEmployee(emp);
     }
 
     @GetMapping("/employees")
-    public List<EmployeeDto> getAllEmployee(){
+    public List<Employee> getAllEmployee(){
         return service.getAllEmployee();
     }
 
     @GetMapping("/employees/{id}")
-    public EmployeeDto getEmployeeById(@PathVariable Long id){
+    public Employee getEmployeeById(@PathVariable Integer id){
         return service.getEmployeeById(id);
     }
 
     @PutMapping("/employees/{id}")
-    public EmployeeDto updateEmployee(@PathVariable Long id,@RequestBody EmployeeDto dto){
-        return service.updateEmployee(id, dto);
+    public Employee updateEmployee(@PathVariable Integer id,@RequestBody Employee emp){
+        return service.updateEmployee(id, emp);
     }
 
     @DeleteMapping("/employees/{id}")
-    public String deleteEmployee(@PathVariable Long id){
+    public String deleteEmployee(@PathVariable Integer id){
         return service.deleteEmployee(id);
     }
 

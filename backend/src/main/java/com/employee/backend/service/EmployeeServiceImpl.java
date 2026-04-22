@@ -5,79 +5,65 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
+import com.employee.backend.entity.Employee;
 import com.employee.backend.exception.DuplicateEmailException;
 import com.employee.backend.exception.ResourceNotFoundException;
+import com.employee.backend.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    @Autowired
+    private EmployeeRepository repository;
     private final Map<Long,EmployeeDto> mockDb = new HashMap<>();
-    private Long idCounter = 1L;
 
     @Override
-    public EmployeeDto createEmployee(EmployeeDto dto){
-        for(EmployeeDto emp : mockDb.values()){
-            if(emp.getEmail().equalsIgnoreCase(dto.getEmail())){// Instead of using twice .toLower()
-                throw new DuplicateEmailException("Email already exists!!!");            }
+    public Employee createEmployee(Employee emp){
+        if(repository.existsByEmailIgnoreCase(emp.getEmail())){
+            throw new DuplicateEmailException("Employee already exists");
         }
-        dto.setId(idCounter);
-        dto.setActive(true);
-        mockDb.put(idCounter, dto);
-        idCounter++;
-        return dto;
+        return repository.save(emp);
     }
 
     @Override
-    public List<EmployeeDto> getAllEmployee(){
-        return new ArrayList<>(mockDb.values());
-
+    public List<Employee> getAllEmployee(){
+        return repository.findAll();
     }
 
     @Override
-    public EmployeeDto getEmployeeById(Long id){
-        EmployeeDto dto = mockDb.get(id);
-        if (dto == null || !dto.isActive()){ // To verify that isActive is false
-            throw new ResourceNotFoundException("Employee not found!!");
-        }
-        return dto;
+    public Employee getEmployeeById(Integer id){
+        return repository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
     }
 
     @Override
-    public EmployeeDto updateEmployee(Long id, EmployeeDto dto) {
+    public Employee updateEmployee(Integer id, Employee emp) {
+        Employee existing = repository.findById(id)
+        .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
 
-        EmployeeDto current = mockDb.get(id);
-        if (current == null) {
-            throw new ResourceNotFoundException("Employee not found !!!");
+        if(repository.existsByEmailIgnoreCaseAndIdNot(existing.getEmail(),id)){
+            throw new DuplicateEmailException("Email a;ready exists");
         }
-
-        for (Map.Entry<Long, EmployeeDto> entry : mockDb.entrySet()) {
-
-            Long keyid = entry.getKey();
-            EmployeeDto emp = entry.getValue();
-
-            if (!keyid.equals(id) && emp.getEmail().equalsIgnoreCase(dto.getEmail())) {
-
-                throw new DuplicateEmailException("Email already exists!!!");
-            }
-        }
-        current.setName(dto.getName());
-        current.setEmail(dto.getEmail());
-        current.setDepartment(dto.getDepartment());
-
-        return current;
+        existing.setName(emp.getName());
+        existing.setEmail(emp.getEmail());
+        existing.setDepartment(emp.getDepartment());
+        existing.setPhoneNumber(emp.getPhoneNumber());
+        existing.setDod(emp.getDod());
+        
+        return repository.save(existing);
     }
 
     @Override
-    public String deleteEmployee(Long id){
+    public String deleteEmployee(Integer id){
 
-        EmployeeDto current = mockDb.get(id);
-        if (current == null){
-            throw new ResourceNotFoundException("Employee Not Found!!!");
-        }
-        current.setActive(false);
+        Employee emp = repository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Employee doesn't exits!!"));
+
+        emp.setIsActive(false);
 
         return "Employee deleted with id " + id;
     }
