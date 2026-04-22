@@ -6,12 +6,13 @@ import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.entity.Employee;
 
 public interface EmployeeService {
-    Employee createEmployee(Employee emp);
+
+    EmployeeDto createEmployee(EmployeeDto dto);
 
     List<Employee> getAllEmployee();
     Employee getEmployeeById(Integer id);
     Employee updateEmployee(Integer id,Employee emp);
     String deleteEmployee(Integer id);
-    List<EmployeeDto> searchEmployees(String name,String dept);
+    // List<EmployeeDto> searchEmployees(String name,String dept);
 
 }

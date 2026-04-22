@@ -1,9 +1,8 @@
 package com.employee.backend.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +18,44 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository repository;
-    private final Map<Long,EmployeeDto> mockDb = new HashMap<>();
+
+    private Employee toEntity(EmployeeDto dto){
+        Employee emp = new Employee();
+
+        emp.setName(dto.getName());
+        emp.setEmail(dto.getEmail());
+        emp.setDepartment(dto.getDepartment());
+        emp.setDod(dto.getDod());
+        emp.setPhoneNumber(dto.getPhoneNumber());
+        emp.setIsActive(true);
+
+        return emp;
+    }
+
+    private EmployeeDto toDto(Employee emp) {
+        EmployeeDto dto = new EmployeeDto();
+
+        dto.setId(emp.getId());
+        dto.setName(emp.getName());
+        dto.setEmail(emp.getEmail());
+        dto.setDepartment(emp.getDepartment());
+        dto.setPhoneNumber(emp.getPhoneNumber());
+        dto.setDod(emp.getDod());
+        dto.setIsActive(emp.getIsActive());
+
+        return dto;
+    }
 
     @Override
-    public Employee createEmployee(Employee emp){
-        if(repository.existsByEmailIgnoreCase(emp.getEmail())){
+    public EmployeeDto createEmployee(EmployeeDto dto){
+        if(repository.existsByEmailIgnoreCase(dto.getEmail())){
             throw new DuplicateEmailException("Employee already exists");
         }
-        return repository.save(emp);
+
+        Employee emp = toEntity(dto);
+        repository.save(emp);
+        
+        return toDto(emp);
     }
 
     @Override
@@ -68,17 +97,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return "Employee deleted with id " + id;
     }
 
-    @Override
-    public List<EmployeeDto> searchEmployees(String name,String dept){
-        List<EmployeeDto> searchList = new ArrayList<>();
-        for (EmployeeDto emp: mockDb.values()){
-            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
-            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
-            if (matchName && matchDept && emp.isActive()){ // Checking isActive()
-                searchList.add(emp);
-            }
-        }
-        return searchList;
-    }
+
+
+
+
+    // @Override
+    // public List<EmployeeDto> searchEmployees(String name,String dept){
+    //     List<EmployeeDto> searchList = new ArrayList<>();
+    //     for (EmployeeDto emp: mockDb.values()){
+    //         boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
+    //         boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
+    //         if (matchName && matchDept && emp.isActive()){ // Checking isActive()
+    //             searchList.add(emp);
+    //         }
+    //     }
+    //     return searchList;
+    // }
 
 }

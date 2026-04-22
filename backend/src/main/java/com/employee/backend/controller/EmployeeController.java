@@ -17,6 +17,8 @@ import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.entity.Employee;
 import com.employee.backend.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/ems")
 public class EmployeeController {
@@ -27,7 +29,7 @@ public class EmployeeController {
     // Basic CRUD API's
 
     @PostMapping("/employees")
-    public Employee create(@RequestBody Employee emp){
+    public EmployeeDto create(@Valid @RequestBody EmployeeDto emp){
         return service.createEmployee(emp);
     }
 
@@ -53,9 +55,9 @@ public class EmployeeController {
 
     // Search API's
 
-    @GetMapping("/employees/search")
-    public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
-        return service.searchEmployees(name, dept);
-
-    }
+    // @GetMapping("/employees/search")
+    // public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
+    //     return service.searchEmployees(name, dept);
+    //}
 }
+

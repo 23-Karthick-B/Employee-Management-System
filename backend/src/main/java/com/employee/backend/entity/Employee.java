@@ -44,7 +44,7 @@ public class Employee {
     private LocalDate dod; 
 
     @Column(name = "IsActive")
-    private Boolean isActive = true;
+    private Boolean isActive;
 
     @Column(name = "CreatedAt", updatable = false)
     private LocalDateTime createdAt;
