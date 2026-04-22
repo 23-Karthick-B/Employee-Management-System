@@ -1,5 +1,6 @@
 package com.employee.backend.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,28 +55,37 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee emp = toEntity(dto);
         repository.save(emp);
-        
+
         return toDto(emp);
     }
 
     @Override
-    public List<Employee> getAllEmployee(){
-        return repository.findAll();
+    public List<EmployeeDto> getAllEmployee(){
+        List<Employee> getAll = new ArrayList<>();
+        List<EmployeeDto> getAllDtos = new ArrayList<>();
+        getAll = repository.findByIsActiveTrue();
+        for(Employee emp: getAll){
+            getAllDtos.add(toDto(emp));
+        }
+        return getAllDtos;
     }
 
     @Override
-    public Employee getEmployeeById(Integer id){
-        return repository.findById(id)
+    public EmployeeDto getEmployeeById(Integer id){
+        Employee emp = repository.findById(id)
+        .filter(Employee::getIsActive)
         .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+
+        return toDto(emp);
     }
 
     @Override
-    public Employee updateEmployee(Integer id, Employee emp) {
+    public EmployeeDto updateEmployee(Integer id, EmployeeDto emp) {
         Employee existing = repository.findById(id)
         .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
 
-        if(repository.existsByEmailIgnoreCaseAndIdNot(existing.getEmail(),id)){
-            throw new DuplicateEmailException("Email a;ready exists");
+        if(repository.existsByEmailIgnoreCaseAndIdNot(emp.getEmail(),id)){
+            throw new DuplicateEmailException("Email already exists");
         }
         existing.setName(emp.getName());
         existing.setEmail(emp.getEmail());
@@ -83,7 +93,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         existing.setPhoneNumber(emp.getPhoneNumber());
         existing.setDod(emp.getDod());
         
-        return repository.save(existing);
+        repository.save(existing);
+
+        return toDto(existing);
     }
 
     @Override
@@ -93,11 +105,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         .orElseThrow(() -> new ResourceNotFoundException("Employee doesn't exits!!"));
 
         emp.setIsActive(false);
+        repository.save(emp);
 
         return "Employee deleted with id " + id;
     }
-
-
 
 
 

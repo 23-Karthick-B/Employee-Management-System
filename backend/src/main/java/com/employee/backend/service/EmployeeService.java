@@ -9,9 +9,9 @@ public interface EmployeeService {
 
     EmployeeDto createEmployee(EmployeeDto dto);
 
-    List<Employee> getAllEmployee();
-    Employee getEmployeeById(Integer id);
-    Employee updateEmployee(Integer id,Employee emp);
+    List<EmployeeDto> getAllEmployee();
+    EmployeeDto getEmployeeById(Integer id);
+    EmployeeDto updateEmployee(Integer id,EmployeeDto emp);
     String deleteEmployee(Integer id);
     // List<EmployeeDto> searchEmployees(String name,String dept);
 
