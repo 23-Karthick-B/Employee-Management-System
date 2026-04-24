@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.backend.dto.EmployeeDto;
@@ -55,9 +55,9 @@ public class EmployeeController {
 
     // Search API's
 
-    // @GetMapping("/employees/search")
-    // public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
-    //     return service.searchEmployees(name, dept);
-    //}
+    @GetMapping("/employees/search")
+    public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
+        return service.searchEmployees(name, dept);
+    }
 }
 

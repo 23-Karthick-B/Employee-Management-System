@@ -127,17 +127,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 
-    // @Override
-    // public List<EmployeeDto> searchEmployees(String name,String dept){
-    //     List<EmployeeDto> searchList = new ArrayList<>();
-    //     for (EmployeeDto emp: mockDb.values()){
-    //         boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
-    //         boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
-    //         if (matchName && matchDept && emp.isActive()){ // Checking isActive()
-    //             searchList.add(emp);
-    //         }
-    //     }
-    //     return searchList;
-    // }
+    @Override
+    public List<EmployeeDto> searchEmployees(String name,String dept){
+        List<EmployeeDto> searchList = new ArrayList<>();
+        for (Employee emp: repository.findAll()){
+            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
+            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
+            if (matchName && matchDept && emp.getIsActive()){ // Checking isActive()
+                searchList.add(toDto(emp));
+            }
+        }
+        return searchList;
+    }
 
 }

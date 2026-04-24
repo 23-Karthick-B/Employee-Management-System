@@ -13,6 +13,6 @@ public interface EmployeeService {
     EmployeeDto getEmployeeById(Integer id);
     EmployeeDto updateEmployee(Integer id,EmployeeDto emp);
     String deleteEmployee(Integer id);
-    // List<EmployeeDto> searchEmployees(String name,String dept);
+    List<EmployeeDto> searchEmployees(String name,String dept);
 
 }
