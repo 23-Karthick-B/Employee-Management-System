@@ -3,6 +3,7 @@ package com.employee.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,8 +35,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<EmployeeDto> getAllEmployee(){
-        return service.getAllEmployee();
+    public Page<EmployeeDto> getAllEmployee(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "Id") String sortBy,
+        @RequestParam(defaultValue = "asc") String direction){
+        return service.getAllEmployee(page,size,sortBy,direction);
     }
 
     @GetMapping("/employees/{id}")

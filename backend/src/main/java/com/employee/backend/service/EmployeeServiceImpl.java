@@ -4,8 +4,11 @@ package com.employee.backend.service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
@@ -48,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dto;
     }
 
+
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
 
@@ -56,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         if(repository.existsByPhoneNumber(dto.getPhoneNumber())){
-            throw new DuplicatePhoneNumberException("Phone number alreay exists");
+            throw new DuplicatePhoneNumberException("Phone number already exists");
         }
 
         Employee emp = toEntity(dto);
@@ -66,16 +70,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> getAllEmployee() {
-    List<Employee> getAll = repository.findAll();
-    List<EmployeeDto> getAllDtos = new ArrayList<>();
+    public Page<EmployeeDto> getAllEmployee(int page, int size,String sortBy, String direction) {
+        Sort sort;
+        List<String> allowedSortFields = List.of("Id", "Name", "Email", "Department");
 
-    for (Employee emp : getAll) {
-        if (emp.getIsActive()) {
-            getAllDtos.add(toDto(emp));
+        if (!allowedSortFields.contains(sortBy)) {
+            sortBy = "Id";
         }
-    }
-    return getAllDtos;
+
+        if(direction.equalsIgnoreCase("desc")){
+            sort = Sort.by(sortBy).descending();
+        }
+        else{
+            sort = Sort.by(sortBy).ascending();
+        }
+        Pageable pageable = PageRequest.of(page, size,sort);
+        return repository.findByIsActiveTrue(pageable)
+            .map(emp -> toDto(emp));
     }
 
     @Override
