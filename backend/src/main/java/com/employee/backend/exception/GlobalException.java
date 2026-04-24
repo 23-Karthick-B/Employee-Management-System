@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.employee.backend.dto.ErrorResponseDto;
 
+import jakarta.validation.ConstraintViolationException;
+
 @RestControllerAdvice
 public class GlobalException {
     @ExceptionHandler(DuplicateEmailException.class)
@@ -45,6 +47,11 @@ public class GlobalException {
             errorMessage += error.getDefaultMessage() + ", ";
         }
          return new ErrorResponseDto(400, errorMessage, LocalTime.now().toString());
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponseDto handleContraintValidation(ConstraintViolationException ex){
+         return new ErrorResponseDto(400, "Validation Error", LocalTime.now().toString());
     }
 
 }

@@ -11,8 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Employees")
@@ -29,6 +31,7 @@ public class Employee {
 
     @NotBlank(message = "Email is required")
     @Column(name = "Email", nullable = false)
+    @Email(message= "Invalid email format")
     private String email;
 
     @NotBlank(message = "Department is required")
@@ -37,6 +40,7 @@ public class Employee {
 
     @NotBlank(message = "PhoneNumber is required")
     @Column(name = "PhoneNumber", nullable = false)
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be exactly 10 digits")
     private String phoneNumber;
 
     @NotNull(message = "DOB is required")
