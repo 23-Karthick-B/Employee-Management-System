@@ -8,8 +8,10 @@ import com.employee.backend.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer>{
 
-    boolean existsByEmailIgnoreCase(String email);
-    boolean existsByEmailIgnoreCaseAndIdNot(String email, Integer id);
+    boolean existsByEmailIgnoreCaseandIsActiveTrue(String email);
+    boolean existsByEmailIgnoreCaseAndIdNotandIsActiveTrue(String email, Integer id);
+    boolean existsByPhoneNumberandIsActiveTrue(String phoneNumber);
+    boolean existsByPhoneNumberAndIdNotandIsActiveTrue(String phoneNumber,Integer id);
     List<Employee> findByIsActiveTrue();
     
 }

@@ -27,4 +27,11 @@ public class GlobalException {
         return new ErrorResponseDto(404, ex.getMessage(), LocalTime.now().toString());
     }
 
+    @ExceptionHandler(DuplicatePhoneNumberException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDto handleDuplicatePhoneNumber(DuplicatePhoneNumberException ex){
+        return new ErrorResponseDto(400, ex.getMessage(), LocalTime.now().toString());
+
+    }
+
 }

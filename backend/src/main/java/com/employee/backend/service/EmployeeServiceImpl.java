@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.entity.Employee;
 import com.employee.backend.exception.DuplicateEmailException;
+import com.employee.backend.exception.DuplicatePhoneNumberException;
 import com.employee.backend.exception.ResourceNotFoundException;
 import com.employee.backend.repository.EmployeeRepository;
 
@@ -53,6 +54,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new DuplicateEmailException("Employee already exists");
         }
 
+        if(repository.existsByPhoneNumber(dto.getPhoneNumber())){
+            throw new DuplicatePhoneNumberException("Phone number alreay exists");
+        }
+
         Employee emp = toEntity(dto);
         repository.save(emp);
 
@@ -90,6 +95,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(repository.existsByEmailIgnoreCaseAndIdNot(emp.getEmail(),id)){
             throw new DuplicateEmailException("Email already exists");
         }
+
+        if(repository.existsByPhoneNumberAndIdNot(emp.getPhoneNumber(), id)){
+            throw new DuplicatePhoneNumberException("Phone number already exists");
+        }
+
         if(emp.getName() != null && !emp.getName().isBlank()){
             existing.setName(emp.getName());
         }
