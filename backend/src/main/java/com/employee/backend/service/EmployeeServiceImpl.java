@@ -50,6 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
+
         if(repository.existsByEmailIgnoreCase(dto.getEmail())){
             throw new DuplicateEmailException("Employee already exists");
         }

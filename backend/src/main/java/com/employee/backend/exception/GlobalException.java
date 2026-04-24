@@ -3,6 +3,8 @@ package com.employee.backend.exception;
 import java.time.LocalTime;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -32,6 +34,17 @@ public class GlobalException {
     public ErrorResponseDto handleDuplicatePhoneNumber(DuplicatePhoneNumberException ex){
         return new ErrorResponseDto(400, ex.getMessage(), LocalTime.now().toString());
 
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDto handleNullEntries(MethodArgumentNotValidException ex){
+        String errorMessage = "";
+
+        for(FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errorMessage += error.getDefaultMessage() + ", ";
+        }
+         return new ErrorResponseDto(400, errorMessage, LocalTime.now().toString());
     }
 
 }
