@@ -60,14 +60,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> getAllEmployee(){
-        List<Employee> getAll = new ArrayList<>();
-        List<EmployeeDto> getAllDtos = new ArrayList<>();
-        getAll = repository.findByIsActiveTrue();
-        for(Employee emp: getAll){
+    public List<EmployeeDto> getAllEmployee() {
+    List<Employee> getAll = repository.findAll();
+    List<EmployeeDto> getAllDtos = new ArrayList<>();
+
+    for (Employee emp : getAll) {
+        if (emp.getIsActive()) {
             getAllDtos.add(toDto(emp));
         }
-        return getAllDtos;
+    }
+    return getAllDtos;
     }
 
     @Override
@@ -82,16 +84,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto updateEmployee(Integer id, EmployeeDto emp) {
         Employee existing = repository.findById(id)
+        .filter(Employee:: getIsActive)
         .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
 
         if(repository.existsByEmailIgnoreCaseAndIdNot(emp.getEmail(),id)){
             throw new DuplicateEmailException("Email already exists");
         }
-        existing.setName(emp.getName());
-        existing.setEmail(emp.getEmail());
-        existing.setDepartment(emp.getDepartment());
-        existing.setPhoneNumber(emp.getPhoneNumber());
-        existing.setDod(emp.getDod());
+        if(emp.getName() != null && !emp.getName().isBlank()){
+            existing.setName(emp.getName());
+        }
+        
+        if(emp.getEmail() != null && !emp.getEmail().isBlank()){
+            existing.setEmail(emp.getEmail());
+        }
+
+        if(emp.getDepartment()!= null && !emp.getDepartment().isBlank()){
+            existing.setDepartment(emp.getDepartment());
+        }
+        if(emp.getPhoneNumber() != null && !emp.getPhoneNumber().isBlank()){
+            existing.setPhoneNumber(emp.getPhoneNumber());
+        }
+        if(emp.getDod() != null){
+            existing.setDod(emp.getDod());
+        }
         
         repository.save(existing);
 

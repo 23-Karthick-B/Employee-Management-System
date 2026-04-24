@@ -3,7 +3,7 @@ package com.employee.backend.service;
 import java.util.List;
 
 import com.employee.backend.dto.EmployeeDto;
-import com.employee.backend.entity.Employee;
+//import com.employee.backend.entity.Employee;
 
 public interface EmployeeService {
 
