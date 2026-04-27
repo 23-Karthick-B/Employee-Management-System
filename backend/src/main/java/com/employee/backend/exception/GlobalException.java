@@ -1,5 +1,6 @@
 package com.employee.backend.exception;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.springframework.http.HttpStatus;
@@ -51,7 +52,13 @@ public class GlobalException {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponseDto handleContraintValidation(ConstraintViolationException ex){
-         return new ErrorResponseDto(400, "Validation Error", LocalTime.now().toString());
+         return new ErrorResponseDto(500, "Validation Error", LocalTime.now().toString());
+    }
+
+    @ExceptionHandler(InvalidAgeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDto handleInvalidAge(InvalidAgeException ex){
+        return new ErrorResponseDto(400, ex.getMessage(), LocalDateTime.now().toString());
     }
 
 }

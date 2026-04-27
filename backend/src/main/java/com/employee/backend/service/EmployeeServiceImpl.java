@@ -1,6 +1,7 @@
 package com.employee.backend.service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.entity.Employee;
 import com.employee.backend.exception.DuplicateEmailException;
 import com.employee.backend.exception.DuplicatePhoneNumberException;
+import com.employee.backend.exception.InvalidAgeException;
 import com.employee.backend.exception.ResourceNotFoundException;
 import com.employee.backend.repository.EmployeeRepository;
 
@@ -51,6 +53,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dto;
     }
 
+    private void validateAge(LocalDate dob){
+        if(dob.isAfter(LocalDate.now().minusYears(18))){
+            throw new InvalidAgeException("Employee must be greater than 18 years!!");
+        }
+    }
+
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
@@ -62,6 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(repository.existsByPhoneNumber(dto.getPhoneNumber())){
             throw new DuplicatePhoneNumberException("Phone number already exists");
         }
+        validateAge(dto.getDod());
 
         Employee emp = toEntity(dto);
         repository.save(emp);

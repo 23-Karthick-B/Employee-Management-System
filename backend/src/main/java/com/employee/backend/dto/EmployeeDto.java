@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 public class EmployeeDto {
 
@@ -22,6 +23,7 @@ public class EmployeeDto {
     private String phoneNumber;
 
     @NotNull(message = "DOB is required")
+    @Past(message = "DOB must be in past")
     private LocalDate dod;
 
     private Boolean isActive;
