@@ -63,12 +63,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto createEmployee(EmployeeDto dto){
 
-        if(repository.existsByEmailIgnoreCase(dto.getEmail())){
-            throw new DuplicateEmailException("Employee already exists");
+
+
+        if(repository.existsByEmailIgnoreCaseAndIsActiveTrue(dto.getEmail())){
+            throw new DuplicateEmailException("Email already exists");
+     
         }
 
-        if(repository.existsByPhoneNumber(dto.getPhoneNumber())){
+        if(repository.existsByPhoneNumberAndIsActiveTrue(dto.getPhoneNumber())){
             throw new DuplicatePhoneNumberException("Phone number already exists");
+  
         }
         validateAge(dto.getDod());
 
@@ -113,12 +117,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         .filter(Employee:: getIsActive)
         .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
 
-        if(repository.existsByEmailIgnoreCaseAndIdNot(emp.getEmail(),id)){
+        if(repository.existsByEmailIgnoreCaseAndIdNotAndIsActiveTrue(emp.getEmail(),id)){
             throw new DuplicateEmailException("Email already exists");
+
         }
 
-        if(repository.existsByPhoneNumberAndIdNot(emp.getPhoneNumber(), id)){
+        if(repository.existsByPhoneNumberAndIdNotAndIsActiveTrue(emp.getPhoneNumber(), id)){
             throw new DuplicatePhoneNumberException("Phone number already exists");
+
         }
 
         if(emp.getName() != null && !emp.getName().isBlank()){
