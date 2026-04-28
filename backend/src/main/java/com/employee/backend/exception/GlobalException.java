@@ -50,9 +50,9 @@ public class GlobalException {
          return new ErrorResponseDto(400, errorMessage, LocalTime.now().toString());
     }
     @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDto handleContraintValidation(ConstraintViolationException ex){
-         return new ErrorResponseDto(500, "Validation Error", LocalTime.now().toString());
+         return new ErrorResponseDto(400, "Validation Error", LocalTime.now().toString());
     }
 
     @ExceptionHandler(InvalidAgeException.class)
@@ -60,5 +60,15 @@ public class GlobalException {
     public ErrorResponseDto handleInvalidAge(InvalidAgeException ex){
         return new ErrorResponseDto(400, ex.getMessage(), LocalDateTime.now().toString());
     }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponseDto handleGenericException(Exception ex) {
+        return new ErrorResponseDto(
+            500,
+            "Something went wrong",
+            LocalDateTime.now().toString()
+        );
+    }
+    
 
 }

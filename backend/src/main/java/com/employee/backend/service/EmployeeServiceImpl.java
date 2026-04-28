@@ -144,6 +144,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(emp.getDod() != null){
             existing.setDod(emp.getDod());
         }
+        validateAge(existing.getDod());
         
         repository.save(existing);
 
