@@ -75,6 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
   
         }
         validateAge(dto.getDod());
+        dto.setEmail(dto.getEmail().toLowerCase());
 
         Employee emp = toEntity(dto);
         repository.save(emp);
@@ -132,7 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         
         if(emp.getEmail() != null && !emp.getEmail().isBlank()){
-            existing.setEmail(emp.getEmail());
+            existing.setEmail(emp.getEmail().toLowerCase());
         }
 
         if(emp.getDepartment()!= null && !emp.getDepartment().isBlank()){

@@ -2,9 +2,11 @@ package com.employee.backend.dto;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
 public class EmployeeDto {
 
@@ -14,12 +16,18 @@ public class EmployeeDto {
     private String name;
 
     @NotBlank(message = "Email is required")
+    @Email(message= "Invalid email format")
+    @Pattern(
+    regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+    message = "Email must be valid"
+    )
     private String email;
 
     @NotBlank(message = "Department is required")
     private String department;
 
     @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be exactly 10 digits")
     private String phoneNumber;
 
     @NotNull(message = "DOB is required")
