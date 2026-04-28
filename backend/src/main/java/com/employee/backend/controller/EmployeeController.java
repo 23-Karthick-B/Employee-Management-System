@@ -1,7 +1,5 @@
 package com.employee.backend.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.backend.dto.EmployeeDto;
-//import com.employee.backend.entity.Employee;
 import com.employee.backend.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -61,8 +58,8 @@ public class EmployeeController {
     // Search API's
 
     @GetMapping("/employees/search")
-    public List<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept){
-        return service.searchEmployees(name, dept);
+    public Page<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        return service.searchEmployees(name, dept,page,size);
     }
 }
 

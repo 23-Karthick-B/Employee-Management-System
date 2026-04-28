@@ -1,6 +1,5 @@
 package com.employee.backend.service;
 
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -14,6 +13,6 @@ public interface EmployeeService {
     EmployeeDto getEmployeeById(Integer id);
     EmployeeDto updateEmployee(Integer id,EmployeeDto emp);
     String deleteEmployee(Integer id);
-    List<EmployeeDto> searchEmployees(String name,String dept);
+    Page<EmployeeDto> searchEmployees(String name,String dept,int page,int size);
 
 }

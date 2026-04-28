@@ -11,8 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "Employees")
@@ -135,8 +134,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String email, String department, String phoneNumber, LocalDate dod,
-            Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Employee(Integer id, String name, String email, String department, String phoneNumber, LocalDate dod, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;

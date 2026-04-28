@@ -14,4 +14,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer>{
     boolean existsByPhoneNumberAndIdNotAndIsActiveTrue(String phoneNumber,Integer id);
     Page<Employee> findByIsActiveTrue(Pageable pageable);
 
+    Page<Employee> findByIsActiveTrueAndNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(String name, String dept,Pageable pageable);
+
 }

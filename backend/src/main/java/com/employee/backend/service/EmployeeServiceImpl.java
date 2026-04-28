@@ -2,7 +2,6 @@ package com.employee.backend.service;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,16 +165,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<EmployeeDto> searchEmployees(String name,String dept){
-        List<EmployeeDto> searchList = new ArrayList<>();
-        for (Employee emp: repository.findAll()){
-            boolean matchName = (name==null || emp.getName().equalsIgnoreCase(name)); // Matching name
-            boolean matchDept = (dept == null || emp.getDepartment().equalsIgnoreCase(dept)); // Matching dept
-            if (matchName && matchDept && emp.getIsActive()){ // Checking isActive()
-                searchList.add(toDto(emp));
-            }
+    public Page<EmployeeDto> searchEmployees(String name,String dept,int page , int size){
+        Pageable pageable = PageRequest.of(page, size);
+
+        if (name == null){
+            name = "";
         }
-        return searchList;
+        if(dept == null){
+            dept = "";
+        }
+
+        Page<Employee> searchList = repository
+        .findByIsActiveTrueAndNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(
+            name,
+            dept,
+            pageable
+        );
+
+        return searchList.map(this::toDto);
     }
 
 }
