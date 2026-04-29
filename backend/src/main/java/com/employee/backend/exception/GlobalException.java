@@ -69,6 +69,4 @@ public class GlobalException {
             LocalDateTime.now().toString()
         );
     }
-    
-
 }
