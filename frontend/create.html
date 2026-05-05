@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+
+  <h2 class="text-xl font-bold mb-4">Employee Form</h2>
+
+  <input id="name" placeholder="Name" class="border p-2 w-full mb-2">
+  <input id="email" placeholder="Email" class="border p-2 w-full mb-2">
+  <input id="dept" placeholder="Department" class="border p-2 w-full mb-2">
+  <input id="phone" placeholder="Phone" class="border p-2 w-full mb-2">
+  <input id="dob" type="date" class="border p-2 w-full mb-2">
+
+  <p id="error" class="text-red-500 text-sm mb-2"></p>
+
+  <button onclick="save()" class="bg-blue-600 text-white w-full py-2 rounded">
+    Save
+  </button>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
