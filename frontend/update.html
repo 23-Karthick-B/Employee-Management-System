@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Employee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+
+  <h2 class="text-xl font-bold mb-4">Update Employee</h2>
+
+  <!-- Name -->
+  <label class="flex items-center gap-2 mb-1">
+    <input type="checkbox" id="editName"> Name
+  </label>
+  <input id="name" disabled class="border p-2 w-full mb-2">
+
+  <!-- Email -->
+  <label class="flex items-center gap-2 mb-1">
+    <input type="checkbox" id="editEmail"> Email
+  </label>
+  <input id="email" disabled class="border p-2 w-full mb-2">
+
+  <!-- Dept -->
+  <label class="flex items-center gap-2 mb-1">
+    <input type="checkbox" id="editDept"> Department
+  </label>
+  <input id="dept" disabled class="border p-2 w-full mb-2">
+
+  <!-- Phone -->
+  <label class="flex items-center gap-2 mb-1">
+    <input type="checkbox" id="editPhone"> Phone
+  </label>
+  <input id="phone" disabled class="border p-2 w-full mb-2">
+
+  <!-- DOB -->
+  <label class="flex items-center gap-2 mb-1">
+    <input type="checkbox" id="editDob"> DOB
+  </label>
+  <input id="dob" type="date" disabled class="border p-2 w-full mb-2">
+
+  <p id="error" class="text-red-500 text-sm mb-2"></p>
+
+  <button onclick="updateEmployee()"
+    class="bg-blue-600 text-white w-full py-2 rounded">
+    Update
+  </button>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
