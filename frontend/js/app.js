@@ -26,6 +26,12 @@ if (isIndexPage) {
       alert(err.message || "Failed to load employees");
     }
   }
+  function formatDate(dateStr) {
+  if (!dateStr) return "-";
+
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-GB"); 
+  }
 
   function render(list) {
     const table = document.getElementById("table");
@@ -38,6 +44,7 @@ if (isIndexPage) {
           <td>${emp.email}</td>
           <td>${emp.department}</td>
           <td>${emp.phoneNumber}</td>
+          <td>${formatDate(emp.dod)}</td>
           <td>
             <button onclick="edit(${emp.id})" class="text-yellow-600">Edit</button>
             <button onclick="del(${emp.id})" class="text-red-600 ml-2">Delete</button>
