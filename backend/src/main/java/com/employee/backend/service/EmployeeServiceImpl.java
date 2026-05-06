@@ -85,7 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Page<EmployeeDto> getAllEmployee(int page, int size,String sortBy, String direction) {
         Sort sort;
-        List<String> allowedSortFields = List.of("Id", "Name", "Email", "Department");
+        List<String> allowedSortFields = List.of("id", "name", "email", "department");
 
         if (!allowedSortFields.contains(sortBy)) {
             sortBy = "Id";
