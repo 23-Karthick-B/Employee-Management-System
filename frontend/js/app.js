@@ -1,5 +1,6 @@
 const BASE = "http://localhost:8080/api/ems/employees";
 let page = 0;
+let totalPages = 0;
 
 const path = window.location.pathname;
 
@@ -15,16 +16,21 @@ if (isIndexPage) {
   load();
 
   async function load() {
-    try {
-      const res = await fetch(`${BASE}?page=${page}&size=5`);
-      if (!res.ok) throw await res.json();
+  try {
+    const res = await fetch(`${BASE}?page=${page}&size=5`);
+    if (!res.ok) throw await res.json();
 
-      const data = await res.json();
-      render(data.content);
+    const data = await res.json();
 
-    } catch (err) {
-      alert(err.message || "Failed to load employees");
-    }
+    totalPages = data.totalPages;   
+    page = data.number;             
+
+    render(data.content);
+    updatePaginationButtons(data);
+
+  } catch (err) {
+    alert(err.message || "Failed to load employees");
+  }
   }
   function formatDate(dateStr) {
   if (!dateStr) return "-";
@@ -90,8 +96,29 @@ if (isIndexPage) {
     }
   };
 
-  window.next = () => { page++; load(); };
-  window.prev = () => { if (page > 0) page--; load(); };
+  window.next = () => {
+  if (page < totalPages - 1) {
+    page++;
+    load();
+  }
+  };
+
+  window.prev = () => {
+    if (page > 0) {
+      page--;
+      load();
+    }
+  };
+  function updatePaginationButtons(data) {
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  prevBtn.disabled = data.first;
+  nextBtn.disabled = data.last;
+
+  prevBtn.classList.toggle("opacity-50", data.first);
+  nextBtn.classList.toggle("opacity-50", data.last);
+  }
 }
 
 
