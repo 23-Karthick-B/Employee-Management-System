@@ -1,6 +1,8 @@
 const BASE = "http://localhost:8080/api/ems/employees";
 let page = 0;
 let totalPages = 0;
+let sortBy = "Id";
+let direction = "asc";
 
 const path = window.location.pathname;
 
@@ -17,7 +19,8 @@ if (isIndexPage) {
 
   async function load() {
   try {
-    const res = await fetch(`${BASE}?page=${page}&size=5`);
+    const res = await fetch(
+  `${BASE}?page=${page}&size=5&sortBy=${sortBy}&direction=${direction}`);
     if (!res.ok) throw await res.json();
 
     const data = await res.json();
@@ -59,6 +62,19 @@ if (isIndexPage) {
       `;
     });
   }
+  window.sort = (field) => {
+
+    if (sortBy === field) {
+      direction = direction === "asc" ? "desc" : "asc";
+    } else {
+      sortBy = field;
+      direction = "asc";
+    }
+
+    page = 0; 
+    load();
+  };
+
 
   window.del = async (id) => {
     if (!confirm("Delete this employee?")) return;
