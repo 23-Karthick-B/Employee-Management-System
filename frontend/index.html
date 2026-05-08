@@ -26,15 +26,42 @@
 
   <table class="w-full bg-white rounded shadow">
     <thead class="bg-gray-200">
-      <tr>
-        <th class="p-2 cursor-pointer" onclick="sort('Name')">Name</th>
-        <th class="cursor-pointer" onclick="sort('Email')">Email</th>
-        <th class="cursor-pointer" onclick="sort('Department')">Dept</th>
-        <th>Phone</th>
-        <th class="cursor-pointer" onclick="sort('Dod')">DOB</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <tr>
+
+    <th class="p-3">
+      <button onclick="sort('name')" class="flex items-center gap-1 font-semibold">
+        Name
+        <span id="nameIcon">↕</span>
+      </button>
+    </th>
+
+    <th class="p-3">
+      <button onclick="sort('email')" class="flex items-center gap-1 font-semibold">
+        Email
+        <span id="emailIcon">↕</span>
+      </button>
+    </th>
+
+    <th class="p-3">
+      <button onclick="sort('department')" class="flex items-center gap-1 font-semibold">
+        Department
+        <span id="departmentIcon">↕</span>
+      </button>
+    </th>
+
+    <th class="p-3">Phone</th>
+
+    <th class="p-3">
+      <button onclick="sort('dod')" class="flex items-center gap-1 font-semibold">
+        DOB
+        <span id="dodIcon">↕</span>
+      </button>
+    </th>
+
+    <th class="p-3">Actions</th>
+
+  </tr>
+  </thead>
     <tbody id="table"></tbody>
   </table>
 

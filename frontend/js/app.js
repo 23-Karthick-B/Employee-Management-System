@@ -29,18 +29,41 @@ if (isIndexPage) {
     page = data.number;             
 
     render(data.content);
+    updateSortIcons();
     updatePaginationButtons(data);
 
   } catch (err) {
     alert(err.message || "Failed to load employees");
   }
   }
+  function updateSortIcons() {
+
+  const fields = ["Id", "Name", "Email", "Department", "DOD"];
+
+  fields.forEach(field => {
+    const icon = document.getElementById(`${field}Icon`);
+
+    if (!icon) return;
+
+    if (field === sortBy) {
+      icon.innerText = direction === "asc" ? "↑" : "↓";
+    } else {
+      icon.innerText = "↕";
+    }
+  });
+}
   function formatDate(dateStr) {
+
   if (!dateStr) return "-";
 
   const date = new Date(dateStr);
-  return date.toLocaleDateString("en-GB"); 
-  }
+
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+}
 
   function render(list) {
     const table = document.getElementById("table");
@@ -64,15 +87,17 @@ if (isIndexPage) {
   }
   window.sort = (field) => {
 
-    if (sortBy === field) {
-      direction = direction === "asc" ? "desc" : "asc";
-    } else {
-      sortBy = field;
-      direction = "asc";
-    }
+  if (sortBy === field) {
+    direction = direction === "asc" ? "desc" : "asc";
+  } else {
+    sortBy = field;
+    direction = "asc";
+  }
 
-    page = 0; 
-    load();
+  updateSortIcons();
+
+  page = 0;
+  load();
   };
 
 
