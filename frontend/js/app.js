@@ -219,12 +219,10 @@ if (isUpdatePage) {
   const editDob = document.getElementById("editDob");
 
   function bindToggle(cb, input) {
-    cb.addEventListener("change", () => {
-      input.disabled = !cb.checked;
-      if (!cb.checked) input.value = "";
-    });
-  }
-
+  cb.addEventListener("change", () => {
+    input.disabled = !cb.checked;
+  });
+}
   bindToggle(editName, nameEl);
   bindToggle(editEmail, emailEl);
   bindToggle(editDept, deptEl);
