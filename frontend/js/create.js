@@ -33,7 +33,13 @@ window.save = async () => {
 
     if (!res.ok) throw await res.json();
 
-    window.location.href = "index.html";
+    showSuccessPopup();
+
+    setTimeout(() => {
+
+      window.location.href = "index.html";
+
+    }, 1500);
 
   } catch (err) {
 

@@ -1,31 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Create Form</title>
+  <title>Create Employee</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-6">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
 
-<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
 
-  <h2 class="text-xl font-bold mb-4">Employee Form</h2>
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
-  <input id="name" placeholder="Name" class="border p-2 w-full mb-2">
-  <input id="email" placeholder="Email" class="border p-2 w-full mb-2">
-  <input id="dept" placeholder="Department" class="border p-2 w-full mb-2">
-  <input id="phone" placeholder="Phone" class="border p-2 w-full mb-2">
-  <input id="dob" type="date" class="border p-2 w-full mb-2">
+    <div class="px-8 py-6 border-b bg-gradient-to-r from-gray-50 to-blue-50">
 
-  <p id="error" class="text-red-500 text-sm mb-2"></p>
+      <div class="flex items-center justify-between">
 
-  <button onclick="save()" class="bg-blue-600 text-white w-full py-2 rounded">
-    Save
-  </button>
+        <div>
 
-</div>
+          <h2 class="text-2xl font-black tracking-tight text-gray-800">
 
-<script src="js/config.js"></script>
-<script src="js/create.js"></script>
+            Create
+            <span class="text-blue-600">
+              Employee
+            </span>
+
+          </h2>
+
+          <p class="text-sm text-gray-500 mt-1">
+            Add employee details into the system
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="p-8 space-y-5">
+
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-600 mb-2">
+          Full Name
+        </label>
+
+        <input
+          id="name"
+          placeholder="Enter employee name"
+          class="border border-gray-300 bg-gray-50 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-600 mb-2">
+          Email Address
+        </label>
+
+        <input
+          id="email"
+          placeholder="Enter email address"
+          class="border border-gray-300 bg-gray-50 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-600 mb-2">
+          Department
+        </label>
+
+        <input
+          id="dept"
+          placeholder="Enter department"
+          class="border border-gray-300 bg-gray-50 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-600 mb-2">
+          Phone Number
+        </label>
+
+        <input
+          id="phone"
+          placeholder="Enter phone number"
+          class="border border-gray-300 bg-gray-50 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-600 mb-2">
+          Date of Birth
+        </label>
+
+        <input
+          id="dob"
+          type="date"
+          class="border border-gray-300 bg-gray-50 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <p id="error" class="text-red-500 text-sm"></p>
+
+
+      <div class="flex gap-3 pt-2">
+
+        <button
+          onclick="window.location.href='index.html'"
+          class="w-1/2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition-all duration-200">
+
+          Cancel
+
+        </button>
+
+        <button
+          onclick="save()"
+          class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-200">
+
+          Save Employee
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    id="successPopup"
+    class="fixed top-6 right-6 bg-white border border-green-200 shadow-lg rounded-2xl px-5 py-4 flex items-start gap-4 hidden animate-bounce">
+
+    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+
+      <span class="text-green-600 text-lg font-bold">
+        ✓
+      </span>
+
+    </div>
+
+    <div>
+
+      <h3 class="font-bold text-gray-800">
+        Employee Created
+      </h3>
+
+      <p class="text-sm text-gray-500 mt-1">
+        Employee added successfully.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/create.js"></script>
+
+  <script>
+
+    function showSuccessPopup() {
+
+      const popup = document.getElementById("successPopup");
+
+      popup.classList.remove("hidden");
+
+      setTimeout(() => {
+        popup.classList.add("hidden");
+      }, 2500);
+    }
+
+  </script>
+
 </body>
 </html>

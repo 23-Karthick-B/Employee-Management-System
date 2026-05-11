@@ -1,56 +1,224 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Update Employee</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-6">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
 
-<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
 
-  <h2 class="text-xl font-bold mb-4">Update Employee</h2>
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
-  <!-- Name -->
-  <label class="flex items-center gap-2 mb-1">
-    <input type="checkbox" id="editName"> Name
-  </label>
-  <input id="name" disabled class="border p-2 w-full mb-2">
 
-  <!-- Email -->
-  <label class="flex items-center gap-2 mb-1">
-    <input type="checkbox" id="editEmail"> Email
-  </label>
-  <input id="email" disabled class="border p-2 w-full mb-2">
+    <div class="px-8 py-6 border-b bg-gradient-to-r from-gray-50 to-blue-50">
 
-  <!-- Dept -->
-  <label class="flex items-center gap-2 mb-1">
-    <input type="checkbox" id="editDept"> Department
-  </label>
-  <input id="dept" disabled class="border p-2 w-full mb-2">
+      <div class="flex items-center justify-between">
 
-  <!-- Phone -->
-  <label class="flex items-center gap-2 mb-1">
-    <input type="checkbox" id="editPhone"> Phone
-  </label>
-  <input id="phone" disabled class="border p-2 w-full mb-2">
+        <div>
 
-  <!-- DOB -->
-  <label class="flex items-center gap-2 mb-1">
-    <input type="checkbox" id="editDob"> DOB
-  </label>
-  <input id="dob" type="date" disabled class="border p-2 w-full mb-2">
+          <h2 class="text-2xl font-black tracking-tight text-gray-800">
 
-  <p id="error" class="text-red-500 text-sm mb-2"></p>
+            Update
+            <span class="text-blue-600">
+              Employee
+            </span>
 
-  <button onclick="updateEmployee()"
-    class="bg-blue-600 text-white w-full py-2 rounded">
-    Update
-  </button>
+          </h2>
 
-</div>
-<script src="js/config.js"></script>
-<script src="js/update.js"></script>
+          <p class="text-sm text-gray-500 mt-1">
+            Modify employee details in the system
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <div class="p-8 space-y-5">
+
+      <div>
+
+        <label class="flex items-center gap-3 mb-2 text-sm font-semibold text-gray-700">
+
+          <input
+            type="checkbox"
+            id="editName"
+            class="w-4 h-4 accent-blue-600">
+
+          Full Name
+
+        </label>
+
+        <input
+          id="name"
+          disabled
+          placeholder="Employee name"
+          class="border border-gray-300 bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+      <div>
+
+        <label class="flex items-center gap-3 mb-2 text-sm font-semibold text-gray-700">
+
+          <input
+            type="checkbox"
+            id="editEmail"
+            class="w-4 h-4 accent-blue-600">
+
+          Email Address
+
+        </label>
+
+        <input
+          id="email"
+          disabled
+          placeholder="Employee email"
+          class="border border-gray-300 bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+      <div>
+
+        <label class="flex items-center gap-3 mb-2 text-sm font-semibold text-gray-700">
+
+          <input
+            type="checkbox"
+            id="editDept"
+            class="w-4 h-4 accent-blue-600">
+
+          Department
+
+        </label>
+
+        <input
+          id="dept"
+          disabled
+          placeholder="Department"
+          class="border border-gray-300 bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+      <div>
+
+        <label class="flex items-center gap-3 mb-2 text-sm font-semibold text-gray-700">
+
+          <input
+            type="checkbox"
+            id="editPhone"
+            class="w-4 h-4 accent-blue-600">
+
+          Phone Number
+
+        </label>
+
+        <input
+          id="phone"
+          disabled
+          placeholder="Phone number"
+          class="border border-gray-300 bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+
+      <div>
+
+        <label class="flex items-center gap-3 mb-2 text-sm font-semibold text-gray-700">
+
+          <input
+            type="checkbox"
+            id="editDob"
+            class="w-4 h-4 accent-blue-600">
+
+          Date of Birth
+
+        </label>
+
+        <input
+          id="dob"
+          type="date"
+          disabled
+          class="border border-gray-300 bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 focus:bg-white p-3 w-full rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+      </div>
+
+      <p id="error" class="text-red-500 text-sm"></p>
+
+
+      <div class="flex gap-3 pt-2">
+
+        <button
+          onclick="window.location.href='index.html'"
+          class="w-1/2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition-all duration-200">
+
+          Cancel
+
+        </button>
+
+        <button
+          onclick="updateEmployee()"
+          class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-200">
+
+          Update Employee
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="successPopup"
+    class="fixed top-6 right-6 bg-white border border-green-200 shadow-lg rounded-2xl px-5 py-4 flex items-start gap-4 hidden">
+
+    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+
+      <span class="text-green-600 text-lg font-bold">
+        ✓
+      </span>
+
+    </div>
+
+    <div>
+
+      <h3 class="font-bold text-gray-800">
+        Employee Updated
+      </h3>
+
+      <p class="text-sm text-gray-500 mt-1">
+        Employee updated successfully.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/update.js"></script>
+
+  <script>
+
+    function showSuccessPopup() {
+
+      const popup = document.getElementById("successPopup");
+
+      popup.classList.remove("hidden");
+
+      setTimeout(() => {
+        popup.classList.add("hidden");
+      }, 2500);
+    }
+
+  </script>
 
 </body>
+
 </html>

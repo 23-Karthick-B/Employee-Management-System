@@ -41,6 +41,25 @@ function bindToggle(cb, input) {
   cb.addEventListener("change", () => {
 
     input.disabled = !cb.checked;
+
+    if (cb.checked) {
+
+      input.classList.remove(
+        "bg-gray-100",
+        "text-gray-400"
+      );
+
+      input.classList.add(
+        "bg-white"
+      );
+
+    } else {
+
+      input.classList.add(
+        "bg-gray-100",
+        "text-gray-400"
+      );
+    }
   });
 }
 
@@ -58,15 +77,25 @@ async function loadEmployee() {
 
     const res = await fetch(`${BASE}/${id}`);
 
-    if (!res.ok) throw await res.json();
+    if (!res.ok)
+      throw await res.json();
 
     const emp = await res.json();
 
-    nameEl.value = emp.name || "";
-    emailEl.value = emp.email || "";
-    deptEl.value = emp.department || "";
-    phoneEl.value = emp.phoneNumber || "";
-    dobEl.value = emp.dod || "";
+    nameEl.value =
+      emp.name || "";
+
+    emailEl.value =
+      emp.email || "";
+
+    deptEl.value =
+      emp.department || "";
+
+    phoneEl.value =
+      emp.phoneNumber || "";
+
+    dobEl.value =
+      emp.dod || "";
 
   } catch (err) {
 
@@ -115,9 +144,17 @@ window.updateEmployee = async () => {
       body: JSON.stringify(emp)
     });
 
-    if (!res.ok) throw await res.json();
+    if (!res.ok)
+      throw await res.json();
 
-    window.location.href = "index.html";
+    showSuccessPopup();
+
+    setTimeout(() => {
+
+      window.location.href =
+        "index.html";
+
+    }, 1500);
 
   } catch (err) {
 
