@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
+import com.employee.backend.dto.EmployeeUpdateDto;
 import com.employee.backend.entity.Employee;
 import com.employee.backend.exception.DuplicateEmailException;
 import com.employee.backend.exception.DuplicatePhoneNumberException;
@@ -112,42 +113,50 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto updateEmployee(Integer id, EmployeeDto emp) {
+    public EmployeeDto updateEmployee(Integer id, EmployeeUpdateDto emp) {
         Employee existing = repository.findById(id)
-        .filter(Employee:: getIsActive)
-        .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
+            .filter(Employee::getIsActive)
+            .orElseThrow(() ->
+                new ResourceNotFoundException("Employee not found"));
 
-        if(repository.existsByEmailIgnoreCaseAndIdNotAndIsActiveTrue(emp.getEmail(),id)){
+        if (emp.getEmail() != null &&
+            repository.existsByEmailIgnoreCaseAndIdNotAndIsActiveTrue(
+                emp.getEmail(), id)) {
+
             throw new DuplicateEmailException("Email already exists");
-
         }
 
-        if(repository.existsByPhoneNumberAndIdNotAndIsActiveTrue(emp.getPhoneNumber(), id)){
-            throw new DuplicatePhoneNumberException("Phone number already exists");
+        if (emp.getPhoneNumber() != null &&
+            repository.existsByPhoneNumberAndIdNotAndIsActiveTrue(
+                emp.getPhoneNumber(), id)) {
 
+            throw new DuplicatePhoneNumberException(
+                "Phone number already exists");
         }
 
-        if(emp.getName() != null && !emp.getName().isBlank()){
+        if (emp.getName() != null && !emp.getName().isBlank()) {
             existing.setName(emp.getName());
         }
-        
-        if(emp.getEmail() != null && !emp.getEmail().isBlank()){
+
+        if (emp.getEmail() != null && !emp.getEmail().isBlank()) {
             existing.setEmail(emp.getEmail().toLowerCase());
         }
 
-        if(emp.getDepartment()!= null && !emp.getDepartment().isBlank()){
+        if (emp.getDepartment() != null &&
+            !emp.getDepartment().isBlank()) {
             existing.setDepartment(emp.getDepartment());
         }
-        if(emp.getPhoneNumber() != null && !emp.getPhoneNumber().isBlank()){
+
+        if (emp.getPhoneNumber() != null &&
+            !emp.getPhoneNumber().isBlank()) {
             existing.setPhoneNumber(emp.getPhoneNumber());
         }
-        if(emp.getDod() != null){
+
+        if (emp.getDod() != null) {
+            validateAge(emp.getDod());
             existing.setDod(emp.getDod());
         }
-        validateAge(existing.getDod());
-        
         repository.save(existing);
-
         return toDto(existing);
     }
 

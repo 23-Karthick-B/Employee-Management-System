@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.backend.dto.EmployeeDto;
+import com.employee.backend.dto.EmployeeUpdateDto;
 import com.employee.backend.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -48,7 +49,7 @@ public class EmployeeController {
     }
 
     @PatchMapping("/employees/{id}")
-    public EmployeeDto updateEmployee(@PathVariable Integer id,@RequestBody EmployeeDto emp){
+    public EmployeeDto updateEmployee(@PathVariable Integer id, @Valid @RequestBody EmployeeUpdateDto emp){
         return service.updateEmployee(id, emp);
     }
 
