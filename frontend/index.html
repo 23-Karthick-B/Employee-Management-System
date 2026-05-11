@@ -23,6 +23,7 @@
       Search
     </button>
   </div>
+  
 
   <table class="w-full bg-white rounded shadow">
     <thead class="bg-gray-200">
@@ -75,6 +76,18 @@
       class="bg-gray-300 px-3 py-1 rounded">
       Next
     </button>
+  </div>
+    <div>
+    <select id="pageSize"
+      onchange="changePageSize()"
+      class="border p-2 rounded">
+
+      <option value="5">5 / page</option>
+      <option value="10">10 / page</option>
+      <option value="15">15 / page</option>
+      <option value="20">20 / page</option>
+
+    </select>
   </div>
 
 </div>

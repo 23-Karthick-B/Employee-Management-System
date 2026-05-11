@@ -1,5 +1,6 @@
 let page = 0;
 let totalPages = 0;
+let size = 5;
 let sortBy = "id";
 let direction = "asc";
 
@@ -10,7 +11,7 @@ async function load() {
   try {
 
     const res = await fetch(
-      `${BASE}?page=${page}&size=${PAGE_SIZE}&sortBy=${sortBy}&direction=${direction}`
+      `${BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`
     );
 
     if (!res.ok) throw await res.json();
@@ -137,7 +138,7 @@ window.search = async () => {
   try {
 
     const res = await fetch(
-      `${BASE}/search?name=${encodeURIComponent(name)}&dept=${encodeURIComponent(dept)}&page=${page}&size=${PAGE_SIZE}`
+      `${BASE}/search?name=${encodeURIComponent(name)}&dept=${encodeURIComponent(dept)}&page=${page}&size=${size}`
     );
 
     if (!res.ok) throw await res.json();
@@ -196,4 +197,13 @@ window.prev = () => {
 
     load();
   }
+};
+
+window.changePageSize = () => {
+
+  size = document.getElementById("pageSize").value;
+
+  page = 0;
+
+  load();
 };
