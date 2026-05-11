@@ -209,24 +209,72 @@ window.clearSearch = () => {
 
 window.del = async (id) => {
 
-  if (!confirm("Delete this employee?")) return;
+  showDeleteModal(async () => {
 
-  try {
+    try {
 
-    const res = await fetch(
-      `${BASE}/${id}`,
-      { method: "DELETE" }
-    );
+      const res = await fetch(
+        `${BASE}/${id}`,
+        {
+          method: "DELETE"
+        }
+      );
 
-    if (!res.ok) throw await res.json();
+      if (!res.ok)
+        throw await res.json();
 
-    load();
+      showDeleteSuccess();
 
-  } catch (err) {
+      setTimeout(() => {
 
-    showError(err.message || "Delete failed");
-  }
+        load();
+
+      }, 800);
+
+    } catch (err) {
+
+      showError(
+        err.message || "Delete failed"
+      );
+    }
+  });
 };
+
+
+function showDeleteModal(onConfirm) {
+
+  const modal =
+    document.getElementById("deleteModal");
+
+  modal.classList.remove("hidden");
+
+  window.confirmDelete = () => {
+
+    modal.classList.add("hidden");
+
+    onConfirm();
+  };
+
+  window.closeDeleteModal = () => {
+
+    modal.classList.add("hidden");
+  };
+}
+
+
+function showDeleteSuccess() {
+
+  const popup =
+    document.getElementById("deleteSuccess");
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => {
+
+    popup.classList.add("hidden");
+
+  }, 2000);
+}
 
 window.edit = (id) => {
   window.location.href =
