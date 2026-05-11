@@ -4,15 +4,30 @@ let size = 5;
 let sortBy = "id";
 let direction = "asc";
 
+let isSearching = false;
+let searchName = "";
+let searchDept = "";
+
 load();
 
 async function load() {
 
   try {
 
-    const res = await fetch(
-      `${BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`
-    );
+    let url = "";
+
+    if (isSearching) {
+
+      url =
+        `${BASE}/search?name=${encodeURIComponent(searchName)}&dept=${encodeURIComponent(searchDept)}&page=${page}&size=${size}`;
+
+    } else {
+
+      url =
+        `${BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
+    }
+
+    const res = await fetch(url);
 
     if (!res.ok) throw await res.json();
 
@@ -27,6 +42,7 @@ async function load() {
     updatePaginationButtons(data);
 
   } catch (err) {
+
     showError(err.message || "Failed to load employees");
   }
 }
@@ -67,20 +83,54 @@ function render(list) {
 
 function updateSortIcons() {
 
-  const fields = ["id", "name", "email", "department", "dod"];
+  const fields = [
+    "name",
+    "email",
+    "department",
+    "dod"
+  ];
 
   fields.forEach(field => {
 
-    const icon =
-      document.getElementById(`${field}Icon`);
+    const asc =
+      document.getElementById(`${field}Asc`);
 
-    if (!icon) return;
+    const desc =
+      document.getElementById(`${field}Desc`);
+
+    if (!asc || !desc) return;
+
+    asc.classList.remove(
+      "text-black",
+      "font-bold"
+    );
+
+    desc.classList.remove(
+      "text-black",
+      "font-bold"
+    );
+
+    asc.classList.add("text-gray-400");
+    desc.classList.add("text-gray-400");
 
     if (field === sortBy) {
-      icon.innerText =
-        direction === "asc" ? "↑" : "↓";
-    } else {
-      icon.innerText = "↕";
+
+      if (direction === "asc") {
+
+        asc.classList.remove("text-gray-400");
+        asc.classList.add(
+          "text-black",
+          "font-bold"
+        );
+
+      } else {
+
+        desc.classList.remove("text-gray-400");
+        desc.classList.add(
+          "text-black",
+          "font-bold"
+        );
+      }
     }
   });
 }
@@ -129,28 +179,32 @@ window.sort = (field) => {
 
 window.search = async () => {
 
-  const name =
+  searchName =
     document.getElementById("name").value;
 
-  const dept =
+  searchDept =
     document.getElementById("dept").value;
 
-  try {
+  isSearching = true;
 
-    const res = await fetch(
-      `${BASE}/search?name=${encodeURIComponent(name)}&dept=${encodeURIComponent(dept)}&page=${page}&size=${size}`
-    );
+  page = 0;
 
-    if (!res.ok) throw await res.json();
+  load();
+};
 
-    const data = await res.json();
+window.clearSearch = () => {
 
-    render(data.content);
+  document.getElementById("name").value = "";
+  document.getElementById("dept").value = "";
 
-  } catch (err) {
+  isSearching = false;
 
-    showError(err.message || "Search failed");
-  }
+  searchName = "";
+  searchDept = "";
+
+  page = 0;
+
+  load();
 };
 
 window.del = async (id) => {
@@ -201,7 +255,9 @@ window.prev = () => {
 
 window.changePageSize = () => {
 
-  size = document.getElementById("pageSize").value;
+  size = Number(
+    document.getElementById("pageSize").value
+  );
 
   page = 0;
 

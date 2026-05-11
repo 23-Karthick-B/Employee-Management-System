@@ -22,6 +22,10 @@
     <button onclick="search()" class="bg-gray-700 text-white px-4 rounded">
       Search
     </button>
+    <button onclick="clearSearch()"
+      class="bg-gray-500 text-white px-4 py-2 rounded">
+      Clear
+    </button>
   </div>
   
 
@@ -29,35 +33,63 @@
     <thead class="bg-gray-200">
   <tr>
 
-    <th class="p-3">
-      <button onclick="sort('name')" class="flex items-center gap-1 font-semibold">
-        Name
-        <span id="nameIcon">↕</span>
-      </button>
-    </th>
+<th>
+  <div class="flex items-center gap-1">
 
-    <th class="p-3">
-      <button onclick="sort('email')" class="flex items-center gap-1 font-semibold">
+    Name
+
+    <div class="flex flex-col leading-none text-[10px]">
+
+      <span
+        id="nameAsc"
+        onclick="sort('name','asc')"
+        class="cursor-pointer text-gray-400">
+        ▲
+      </span>
+
+      <span
+        id="nameDesc"
+        onclick="sort('name','desc')"
+        class="cursor-pointer text-gray-400">
+        ▼
+      </span>
+
+    </div>
+
+  </div>
+</th>
+
+  <th class="cursor-pointer" onclick="sort('email')">
+      <div class="flex items-center gap-1">
         Email
-        <span id="emailIcon">↕</span>
-      </button>
-    </th>
+        <div class="flex flex-col leading-none text-[10px]">
+          <span id="emailAsc">▲</span>
+          <span id="emailDesc">▼</span>
+        </div>
+      </div>
+  </th>
 
-    <th class="p-3">
-      <button onclick="sort('department')" class="flex items-center gap-1 font-semibold">
-        Department
-        <span id="departmentIcon">↕</span>
-      </button>
-    </th>
+  <th class="cursor-pointer" onclick="sort('department')">
+    <div class="flex items-center gap-1">
+      Department
+      <div class="flex flex-col leading-none text-[10px]">
+        <span id="departmentAsc">▲</span>
+        <span id="departmentDesc">▼</span>
+      </div>
+    </div>
+  </th>
 
     <th class="p-3">Phone</th>
 
-    <th class="p-3">
-      <button onclick="sort('dod')" class="flex items-center gap-1 font-semibold">
-        DOB
-        <span id="dodIcon">↕</span>
-      </button>
-    </th>
+  <th class="cursor-pointer" onclick="sort('dod')">
+    <div class="flex items-center gap-1">
+      DOB
+      <div class="flex flex-col leading-none text-[10px]">
+        <span id="dodAsc">▲</span>
+        <span id="dodDesc">▼</span>
+      </div>
+    </div>
+  </th>
 
     <th class="p-3">Actions</th>
 
@@ -66,30 +98,34 @@
     <tbody id="table"></tbody>
   </table>
 
-  <div class="flex justify-between mt-4">
-    <button id="prevBtn" onclick="prev()"
+ <div class="flex justify-between items-center mt-4">
+
+  <div class="flex gap-2">
+    <button id="prevBtn"
+      onclick="prev()"
       class="bg-gray-300 px-3 py-1 rounded">
       Prev
     </button>
 
-    <button id="nextBtn" onclick="next()"
+    <button id="nextBtn"
+      onclick="next()"
       class="bg-gray-300 px-3 py-1 rounded">
       Next
     </button>
   </div>
-    <div>
-    <select id="pageSize"
-      onchange="changePageSize()"
-      class="border p-2 rounded">
 
-      <option value="5">5 / page</option>
-      <option value="10">10 / page</option>
-      <option value="15">15 / page</option>
-      <option value="20">20 / page</option>
+  <select id="pageSize"
+    onchange="changePageSize()"
+    class="border p-2 rounded">
 
-    </select>
+    <option value="5">5 / page</option>
+    <option value="10">10 / page</option>
+    <option value="15">15 / page</option>
+    <option value="20">20 / page</option>
+
+  </select>
+
   </div>
-
 </div>
 
 <script src="js/config.js"></script>
