@@ -1,3 +1,9 @@
+const username = "admin";
+const password = "admin";
+
+const authHeader =
+  "Basic " + btoa(username + ":" + password);
+
 window.save = async () => {
 
   const emp = {
@@ -25,7 +31,8 @@ window.save = async () => {
       method: "POST",
 
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: authHeader
       },
 
       body: JSON.stringify(emp)

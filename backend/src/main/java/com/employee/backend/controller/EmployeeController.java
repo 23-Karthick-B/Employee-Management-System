@@ -19,7 +19,7 @@ import com.employee.backend.service.EmployeeService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/api/ems")
 public class EmployeeController {

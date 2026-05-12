@@ -8,6 +8,12 @@ let isSearching = false;
 let searchName = "";
 let searchDept = "";
 
+const username = "admin";
+const password = "admin";
+
+const authHeader =
+  "Basic " + btoa(username + ":" + password);
+
 load();
 
 async function load() {
@@ -27,7 +33,11 @@ async function load() {
         `${BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
     }
 
-    const res = await fetch(url);
+    const res = await fetch(url,{
+      headers:{
+        Authorization: authHeader
+      }
+    });
 
     if (!res.ok) throw await res.json();
 
@@ -216,7 +226,10 @@ window.del = async (id) => {
       const res = await fetch(
         `${BASE}/${id}`,
         {
-          method: "DELETE"
+          method: "DELETE",
+          headers: {
+            Authorization: authHeader
+          }
         }
       );
 

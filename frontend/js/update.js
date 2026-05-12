@@ -1,3 +1,8 @@
+const username = "admin";
+const password = "admin";
+const authHeader =
+  "Basic " + btoa("admin:admin");
+
 const params =
   new URLSearchParams(window.location.search);
 
@@ -75,7 +80,11 @@ async function loadEmployee() {
 
   try {
 
-    const res = await fetch(`${BASE}/${id}`);
+    const res = await fetch(`${BASE}/${id}`, {
+      headers: {
+        Authorization: authHeader
+      }
+    });
 
     if (!res.ok)
       throw await res.json();
@@ -138,7 +147,8 @@ window.updateEmployee = async () => {
       method: "PATCH",
 
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: authHeader
       },
 
       body: JSON.stringify(emp)

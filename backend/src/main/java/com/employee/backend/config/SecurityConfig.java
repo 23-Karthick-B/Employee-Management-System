@@ -31,7 +31,7 @@ public class SecurityConfig {
 
    @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-      http.csrf(csfr -> csfr.disable())
+      http.csrf(csfr -> csfr.disable()).cors(cors->{})
       .authorizeHttpRequests(auth -> auth.requestMatchers("/ems/login").permitAll().anyRequest().authenticated())
       .httpBasic(Customizer.withDefaults());
       return http.build();
