@@ -1,3 +1,5 @@
+protectPage();
+
 let page = 0;
 let totalPages = 0;
 let size = 5;
@@ -7,12 +9,6 @@ let direction = "asc";
 let isSearching = false;
 let searchName = "";
 let searchDept = "";
-
-const username = "admin";
-const password = "admin";
-
-const authHeader =
-  "Basic " + btoa(username + ":" + password);
 
 load();
 
@@ -34,9 +30,7 @@ async function load() {
     }
 
     const res = await fetch(url,{
-      headers:{
-        Authorization: authHeader
-      }
+      headers:getHeaders()
     });
 
     if (!res.ok) throw await res.json();
@@ -227,9 +221,7 @@ window.del = async (id) => {
         `${BASE}/${id}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization: authHeader
-          }
+          headers: getHeaders()
         }
       );
 
@@ -324,3 +316,27 @@ window.changePageSize = () => {
 
   load();
 };
+
+function showError(message) {
+
+  const popup =
+    document.getElementById("errorPopup");
+
+  popup.innerText = message;
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => {
+
+    popup.classList.add("hidden");
+
+  }, 3000);
+}
+
+function formatDate(date) {
+
+  if (!date) return "";
+
+  return new Date(date)
+    .toLocaleDateString("en-GB");
+}

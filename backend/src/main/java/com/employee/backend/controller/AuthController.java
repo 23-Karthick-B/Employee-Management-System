@@ -25,14 +25,14 @@ public class AuthController {
             @RequestBody LoginRequestDto request) {
 
         if (
-            request.getUserName().equals(ADMIN_USERNAME)
+            request.getUsername().equals(ADMIN_USERNAME)
             &&
             request.getPassword().equals(ADMIN_PASSWORD)
         ) {
 
             String token =
                 jwtService.generateToken(
-                    request.getUserName()
+                    request.getUsername()
                 );
 
             return new LoginResponseDto(token);

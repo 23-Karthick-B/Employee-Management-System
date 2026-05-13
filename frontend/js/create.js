@@ -1,8 +1,4 @@
-const username = "admin";
-const password = "admin";
-
-const authHeader =
-  "Basic " + btoa(username + ":" + password);
+protectPage();
 
 window.save = async () => {
 
@@ -21,7 +17,7 @@ window.save = async () => {
       document.getElementById("phone").value,
 
     dod:
-      document.getElementById("dob").value
+      document.getElementById("dod").value
   };
 
   try {
@@ -30,10 +26,7 @@ window.save = async () => {
 
       method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authHeader
-      },
+      headers: getHeaders(true),
 
       body: JSON.stringify(emp)
     });

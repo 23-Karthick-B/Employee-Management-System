@@ -1,8 +1,4 @@
-const username = "admin";
-const password = "admin";
-const authHeader =
-  "Basic " + btoa("admin:admin");
-
+protectPage();
 const params =
   new URLSearchParams(window.location.search);
 
@@ -21,7 +17,7 @@ const phoneEl =
   document.getElementById("phone");
 
 const dobEl =
-  document.getElementById("dob");
+  document.getElementById("dod");
 
 const errorEl =
   document.getElementById("error");
@@ -81,9 +77,7 @@ async function loadEmployee() {
   try {
 
     const res = await fetch(`${BASE}/${id}`, {
-      headers: {
-        Authorization: authHeader
-      }
+      headers: getHeaders(true)
     });
 
     if (!res.ok)
@@ -146,10 +140,7 @@ window.updateEmployee = async () => {
 
       method: "PATCH",
 
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authHeader
-      },
+      headers: getHeaders(true),
 
       body: JSON.stringify(emp)
     });
