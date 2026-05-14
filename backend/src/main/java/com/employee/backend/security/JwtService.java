@@ -11,20 +11,14 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
    private final String SECRET = "emssecretkeysecretkeysecretkeyseceretkeysecretkey12";
-   private final Key key =
-        Keys.hmacShaKeyFor(SECRET.getBytes());
+   private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     public String generateToken(String username) {
 
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
-                .expiration(
-                    new Date(
-                        System.currentTimeMillis()
-                        + 1000 * 60 * 60
-                    )
-                )
+                .expiration(new Date(System.currentTimeMillis()+ 1000 * 60 * 60))
                 .signWith(key)
                 .compact();
     }

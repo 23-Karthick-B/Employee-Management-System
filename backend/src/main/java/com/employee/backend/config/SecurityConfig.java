@@ -22,32 +22,15 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration config =
-            new CorsConfiguration();
+        CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(
-            List.of("http://127.0.0.1:5500")
-        );
-
-        config.setAllowedMethods(
-            List.of("GET", "POST", "PUT",
-                    "PATCH", "DELETE", "OPTIONS")
-        );
-
-        config.setAllowedHeaders(
-            List.of("*")
-        );
-
+        config.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS") );
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration(
-            "/**",
-            config
-        );
-
+        UrlBasedCorsConfigurationSource source =new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",config);
         return source;
     }
 
@@ -55,32 +38,20 @@ public class SecurityConfig {
     private JwtAuthFilter jwtAuthFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
             .csrf(csrf -> csrf.disable())
-
             .cors(Customizer.withDefaults())
-
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/auth/**"
-                ).permitAll()
+                .requestMatchers("/auth/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
             )
 
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(
-                    SessionCreationPolicy.STATELESS
-                )
-            )
-
-            .addFilterBefore(
-                jwtAuthFilter,
-                UsernamePasswordAuthenticationFilter.class
-            );
+            .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtAuthFilter,UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
