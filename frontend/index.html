@@ -42,11 +42,23 @@
 
       </a>
 
-      <div class="hidden md:flex items-center gap-2 text-sm text-green-600 font-medium">
+      <div class="flex items-center gap-4">
 
-        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+        <div class="hidden md:flex items-center gap-2 text-sm text-green-600 font-medium">
 
-        Active
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+
+          Active
+
+        </div>
+
+        <button
+          onclick="openLogoutModal()"
+          class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200">
+
+          Logout
+
+        </button>
 
       </div>
 
@@ -407,6 +419,86 @@
   id="errorPopup"
   class="hidden fixed top-5 right-5 bg-red-600 text-white px-5 py-3 rounded-xl shadow-lg z-50">
 </div>
+
+<div
+  id="logoutModal"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+
+    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+
+      <span class="text-red-600 text-2xl">
+        ?
+      </span>
+
+    </div>
+
+    <div class="text-center">
+
+      <h2 class="text-xl font-bold text-gray-800">
+        Logout Confirmation
+      </h2>
+
+      <p class="text-sm text-gray-500 mt-2 leading-relaxed">
+
+        Are you sure you want to logout from the system?
+
+      </p>
+
+    </div>
+
+    <div class="flex gap-3 mt-6">
+
+      <button
+        onclick="closeLogoutModal()"
+        class="w-1/2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition">
+
+        Cancel
+
+      </button>
+
+      <button
+        onclick="logout()"
+        class="w-1/2 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition">
+
+        Logout
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  function openLogoutModal() {
+
+    document
+      .getElementById("logoutModal")
+      .classList.remove("hidden");
+
+  }
+
+  function closeLogoutModal() {
+
+    document
+      .getElementById("logoutModal")
+      .classList.add("hidden");
+
+  }
+
+  function logout() {
+
+    localStorage.removeItem("token");
+
+    window.location.href = "login.html";
+
+  }
+
+</script>
 
 </body>
 

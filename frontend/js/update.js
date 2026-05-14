@@ -1,4 +1,4 @@
-protectPage();
+
 const params =
   new URLSearchParams(window.location.search);
 
@@ -163,3 +163,9 @@ window.updateEmployee = async () => {
       err.message || "Update failed";
   }
 };
+
+(async () => {
+
+  await protectPage();
+
+})();

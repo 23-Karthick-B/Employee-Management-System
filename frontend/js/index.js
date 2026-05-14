@@ -1,4 +1,3 @@
-protectPage();
 
 let page = 0;
 let totalPages = 0;
@@ -9,8 +8,6 @@ let direction = "asc";
 let isSearching = false;
 let searchName = "";
 let searchDept = "";
-
-load();
 
 async function load() {
 
@@ -313,8 +310,8 @@ window.changePageSize = () => {
   );
 
   page = 0;
-
   load();
+
 };
 
 function showError(message) {
@@ -340,3 +337,11 @@ function formatDate(date) {
   return new Date(date)
     .toLocaleDateString("en-GB");
 }
+
+(async () => {
+
+  await protectPage();
+
+  load();
+
+})();

@@ -1,5 +1,3 @@
-protectPage();
-
 window.save = async () => {
 
   const emp = {
@@ -47,3 +45,9 @@ window.save = async () => {
       err.message || "Create failed";
   }
 };
+
+(async () => {
+
+  await protectPage();
+
+})();
