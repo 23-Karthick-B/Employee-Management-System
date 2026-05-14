@@ -14,6 +14,6 @@ public interface EmployeeService {
     EmployeeDto getEmployeeById(Integer id);
     EmployeeDto updateEmployee(Integer id,EmployeeUpdateDto emp);
     String deleteEmployee(Integer id);
-    Page<EmployeeDto> searchEmployees(String name,String dept,int page,int size);
+    Page<EmployeeDto> searchEmployees(String name,String dept,int page,int size,String sortBy,String direction);
 
 }

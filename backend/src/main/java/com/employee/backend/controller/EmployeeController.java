@@ -61,8 +61,8 @@ public class EmployeeController {
     // Search API's
 
     @GetMapping("/employees/search")
-    public Page<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        return service.searchEmployees(name, dept,page,size);
+    public Page<EmployeeDto> searchEmployees(@RequestParam(required = false) String name,@RequestParam(required = false) String dept,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size,        @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "asc") String direction){
+        return service.searchEmployees(name, dept,page,size,sortBy,direction);
     }
 }
 

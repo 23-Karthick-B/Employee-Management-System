@@ -173,23 +173,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Page<EmployeeDto> searchEmployees(String name,String dept,int page , int size){
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<EmployeeDto> searchEmployees(String name,String dept,int page,int size,String sortBy,String direction) {
 
-        if (name == null){
+        List<String> allowedSortFields = List.of("id", "name", "email", "department","dod");
+
+        if (!allowedSortFields.contains(sortBy)) {
+            sortBy = "id";
+        }
+
+        Sort sort;
+        if (direction.equalsIgnoreCase("desc")) {
+            sort = Sort.by(sortBy).descending();
+        } else {
+            sort = Sort.by(sortBy).ascending();
+        }
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        if (name == null) {
             name = "";
         }
-        if(dept == null){
+
+        if (dept == null) {
             dept = "";
         }
-
-        Page<Employee> searchList = repository
-        .findByIsActiveTrueAndNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(
-            name,
-            dept,
-            pageable
-        );
-
+        Page<Employee> searchList =repository.findByIsActiveTrueAndNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(name,dept,pageable);
         return searchList.map(this::toDto);
     }
 

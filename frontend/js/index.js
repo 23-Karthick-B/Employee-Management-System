@@ -21,7 +21,7 @@ async function load() {
     if (isSearching) {
 
       url =
-        `${BASE}/search?name=${encodeURIComponent(searchName)}&dept=${encodeURIComponent(searchDept)}&page=${page}&size=${size}`;
+    `${BASE}/search?name=${encodeURIComponent(searchName)}&dept=${encodeURIComponent(searchDept)}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
 
     } else {
 
