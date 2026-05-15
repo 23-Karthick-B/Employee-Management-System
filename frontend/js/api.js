@@ -1,5 +1,4 @@
-const BASE =
-  "http://localhost:8080/api/ems/employees";
+const BASE = "http://localhost:8080/api/ems/employees";
 
 function getToken() {
   return localStorage.getItem("token");
@@ -7,9 +6,7 @@ function getToken() {
 
 function getHeaders(isJson = true) {
 
-  const headers = {
-    Authorization: `Bearer ${getToken()}`
-  };
+  const headers = { Authorization: `Bearer ${getToken()}`};
 
   if (isJson) {
     headers["Content-Type"] = "application/json";
@@ -22,37 +19,22 @@ async function protectPage() {
   const token = getToken();
 
   if (!token) {
-
     window.location.href = "login.html";
-
     return;
   }
 
   try {
-
     const res = await fetch(
-      BASE,
-      {
-        headers: getHeaders(false)
-      }
+      BASE, {headers: getHeaders(false)}
     );
 
-    if (
-      res.status === 401 ||
-      res.status === 403
-    ) {
-
+    if (res.status === 401 || res.status === 403) {
       localStorage.removeItem("token");
-
-      window.location.href =
-        "login.html";
+      window.location.href = "login.html";
     }
 
   } catch (err) {
-
     localStorage.removeItem("token");
-
-    window.location.href =
-      "login.html";
+    window.location.href = "login.html";
   }
 }

@@ -1,13 +1,9 @@
-const BASE =
-  "http://localhost:8080/auth";
+const BASE = "http://localhost:8080/auth";
 
 async function login() {
 
-  const username =
-    document.getElementById("username").value;
-
-  const password =
-    document.getElementById("password").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
   try {
 
@@ -15,16 +11,8 @@ async function login() {
       `${BASE}/login`,
       {
         method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body: JSON.stringify({
-          username,
-          password
-        })
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ username, password})
       }
     );
 
@@ -33,16 +21,11 @@ async function login() {
 
     const data = await res.json();
 
-    localStorage.setItem(
-      "token",
-      data.token
-    );
+    localStorage.setItem( "token",data.token);
 
-    window.location.href =
-      "welcome.html";
+    window.location.href = "welcome.html";
 
   } catch (err) {
-
     alert(err.message);
   }
 }
