@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.employee.backend.dto.EmployeeDto;
@@ -26,6 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Employee toEntity(EmployeeDto dto){
         Employee emp = new Employee();
 
@@ -35,6 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setDod(dto.getDod());
         emp.setPhoneNumber(dto.getPhoneNumber());
         emp.setIsActive(true);
+        emp.setPassword(passwordEncoder.encode(dto.getPassword()));
+        emp.setSalary(dto.getSalary());
 
         return emp;
     }
@@ -49,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         dto.setPhoneNumber(emp.getPhoneNumber());
         dto.setDod(emp.getDod());
         dto.setIsActive(emp.getIsActive());
+        dto.setSalary(emp.getSalary());
 
         return dto;
     }

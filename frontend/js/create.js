@@ -5,7 +5,9 @@ window.save = async () => {
     email: document.getElementById("email").value,
     department: document.getElementById("dept").value,
     phoneNumber: document.getElementById("phone").value,
-    dod: document.getElementById("dod").value
+    dod: document.getElementById("dod").value,
+    password:document.getElementById("password").value,
+    salary:document.getElementById("salary").value,
   };
 
   try {

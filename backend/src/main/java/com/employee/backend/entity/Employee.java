@@ -40,6 +40,12 @@ public class Employee {
     @Column(name = "IsActive")
     private Boolean isActive;
 
+    @Column(name = "Password")
+    private String password;
+
+    @Column(name = "Salary")
+    private Double salary;
+
     @Column(name = "CreatedAt", updatable = false)
     private LocalDateTime createdAt;
 
@@ -133,8 +139,26 @@ public class Employee {
 
     public Employee() {
     }
+    
 
-    public Employee(Integer id, String name, String email, String department, String phoneNumber, LocalDate dod, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Employee(Integer id, String name, String email, String department, String phoneNumber, LocalDate dod,
+            Boolean isActive, String password, Double salary, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -142,6 +166,8 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.dod = dod;
         this.isActive = isActive;
+        this.password = password;
+        this.salary = salary;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

@@ -31,9 +31,7 @@ public class AuthController {
         ) {
 
             String token =
-                jwtService.generateToken(
-                    request.getUsername()
-                );
+                jwtService.generateToken(request.getUsername(),"ADMIN");
 
             return new LoginResponseDto(token);
         }

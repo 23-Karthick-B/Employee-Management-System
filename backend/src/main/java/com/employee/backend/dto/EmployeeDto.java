@@ -36,6 +36,27 @@ public class EmployeeDto {
 
     private Boolean isActive;
 
+    private String password;
+
+    private Double salary;
+    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     public Integer getId() {
         return id;
     }
