@@ -52,8 +52,18 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**","/employee/auth/**")
+                .requestMatchers("/auth/**")
                 .permitAll()
+
+                .requestMatchers("/employee/auth/**")
+                .permitAll()
+
+                .requestMatchers("/api/ems/employees/**")
+                .hasRole("ADMIN")
+
+                .requestMatchers("/employee/**")
+                .hasRole("EMPLOYEE")
+
                 .anyRequest()
                 .authenticated()
             )

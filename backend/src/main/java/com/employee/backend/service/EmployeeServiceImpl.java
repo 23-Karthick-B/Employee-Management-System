@@ -41,7 +41,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.setIsActive(true);
         emp.setPassword(passwordEncoder.encode(dto.getPassword()));
         emp.setSalary(dto.getSalary());
-
         return emp;
     }
 
