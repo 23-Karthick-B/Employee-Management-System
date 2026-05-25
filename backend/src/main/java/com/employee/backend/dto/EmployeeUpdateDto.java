@@ -25,6 +25,9 @@ public class EmployeeUpdateDto {
 
     private LocalDate dod;
 
+    private Double salary;
+    
+
     public String getName() {
        return name;
     }
@@ -63,6 +66,14 @@ public class EmployeeUpdateDto {
 
     public void setDod(LocalDate dod) {
        this.dod = dod;
+    }
+
+    public Double getSalary() {
+       return salary;
+    }
+
+    public void setSalary(Double salary) {
+       this.salary = salary;
     }
 
 

@@ -157,6 +157,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             !emp.getPhoneNumber().isBlank()) {
             existing.setPhoneNumber(emp.getPhoneNumber());
         }
+        if (emp.getSalary()!= null &&
+            !emp.getSalary().isNaN()) {
+            existing.setSalary(emp.getSalary());
+        }
 
         if (emp.getDod() != null) {
             validateAge(emp.getDod());

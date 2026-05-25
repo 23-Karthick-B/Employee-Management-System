@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.employee.backend.dto.EmployeeDto;
 import com.employee.backend.dto.EmployeeProfileUpdateDto;
 import com.employee.backend.entity.Employee;
-import com.employee.backend.exception.DuplicatePhoneNumberException;
 import com.employee.backend.repository.EmployeeRepository;
 
 @RestController
