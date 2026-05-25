@@ -43,35 +43,38 @@
 
       </div>
 
-      <div class="flex items-center gap-4">
+<div class="flex items-center gap-4">
 
-        <div class="text-right">
+  <!-- USER INFO -->
 
-          <p
-            id="employeeName"
-            class="font-bold text-sm"
-          >
-            Loading...
-          </p>
+  <div class="text-right">
 
-          <p
-            id="employeeEmail"
-            class="text-xs text-gray-500"
-          >
-          </p>
+    <p
+      id="employeeName"
+      class="font-bold text-sm"
+    >
+      Loading...
+    </p>
 
-        </div>
+    <p
+      id="employeeEmail"
+      class="text-xs text-gray-500"
+    >
+    </p>
 
-        <button
-          onclick="logout()"
-          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow"
-        >
+  </div>
 
-          Logout
+  <!-- LOGOUT BUTTON -->
 
-        </button>
+  <button
+    onclick="openLogoutModal()"
+    class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl font-semibold shadow-sm hover:shadow-md transition whitespace-nowrap">
 
-      </div>
+    Logout
+
+  </button>
+
+</div>
 
     </div>
 
@@ -203,7 +206,7 @@
 
     </div>
 
-    <!-- PROFILE -->
+    <!-- PROFILE + ACTIONS -->
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -232,9 +235,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Full Name
-
             </label>
 
             <p
@@ -249,9 +250,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Email
-
             </label>
 
             <p
@@ -266,9 +265,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Phone Number
-
             </label>
 
             <p
@@ -283,9 +280,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Date Of Birth
-
             </label>
 
             <p
@@ -300,9 +295,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Department
-
             </label>
 
             <p
@@ -317,9 +310,7 @@
           <div>
 
             <label class="text-sm text-gray-500">
-
               Salary
-
             </label>
 
             <p
@@ -352,29 +343,28 @@
         <div class="p-6 space-y-4">
 
           <button
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow"
-          >
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow">
 
             Download Payslip
 
           </button>
 
           <button
-            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold"
-          >
+            onclick="window.location.href='leave.html'"
+            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold">
 
             Apply Leave
 
           </button>
 
-            <button
+          <button
             onclick="window.location.href='empUpdate.html'"
-            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold"
-            >
+            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold">
 
             Update Profile
 
-            </button>
+          </button>
+
 
         </div>
 
@@ -384,8 +374,101 @@
 
   </div>
 
+  <!-- LOGOUT MODAL -->
+
+  <div
+    id="logoutModal"
+    class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div class="bg-white rounded-2xl p-6 w-96 shadow-xl">
+
+      <h2 class="text-2xl font-black mb-2">
+
+        Confirm Logout
+
+      </h2>
+
+      <p class="text-gray-500 mb-6">
+
+        Are you sure you want to logout?
+
+      </p>
+
+      <div class="flex gap-3">
+
+        <button
+          onclick="closeLogoutModal()"
+          class="w-1/2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition">
+
+          Cancel
+
+        </button>
+
+        <button
+          onclick="logout()"
+          class="w-1/2 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-semibold shadow-sm hover:shadow-md transition">
+
+          Logout
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JS FILES -->
+
   <script src="./js/api.js"></script>
   <script src="./js/dashboard.js"></script>
+
+  <!-- LOGOUT SCRIPT -->
+
+  <script>
+
+    // Protect Dashboard
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+
+      window.location.href = "login.html";
+
+    }
+
+    // Open Modal
+
+    function openLogoutModal() {
+
+      document
+        .getElementById("logoutModal")
+        .classList.remove("hidden");
+
+    }
+
+    // Close Modal
+
+    function closeLogoutModal() {
+
+      document
+        .getElementById("logoutModal")
+        .classList.add("hidden");
+
+    }
+
+    // Logout
+
+    function logout() {
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("employee");
+
+      window.location.href = "login.html";
+
+    }
+
+  </script>
 
 </body>
 

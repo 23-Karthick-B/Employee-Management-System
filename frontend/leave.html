@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Apply Leave</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-slate-100 to-blue-50 min-h-screen flex items-center justify-center p-6">
+
+  <!-- CONTAINER -->
+
+  <div class="w-full max-w-2xl bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
+
+    <!-- HEADER -->
+
+    <div class="px-10 py-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+
+      <p class="text-xs uppercase tracking-[0.25em] text-blue-100 font-semibold">
+
+        Employee Portal
+
+      </p>
+
+      <h1 class="text-3xl font-black mt-2">
+
+        Apply Leave
+
+      </h1>
+
+      <p class="text-sm text-blue-100 mt-2">
+
+        Submit your leave request for approval
+
+      </p>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="p-10 space-y-7">
+
+      <!-- DATE SECTION -->
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- FROM DATE -->
+
+        <div>
+
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+
+            From Date
+
+          </label>
+
+          <input
+            id="fromDate"
+            type="date"
+            class="w-full border border-gray-300 rounded-2xl px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+          >
+
+        </div>
+
+        <!-- TO DATE -->
+
+        <div>
+
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+
+            To Date
+
+          </label>
+
+          <input
+            id="toDate"
+            type="date"
+            class="w-full border border-gray-300 rounded-2xl px-4 py-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- REASON -->
+
+      <div>
+
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+
+          Reason
+
+        </label>
+
+        <textarea
+          id="reason"
+          rows="5"
+          placeholder="Enter leave reason..."
+          class="w-full border border-gray-300 rounded-2xl px-4 py-3 bg-gray-50 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+        ></textarea>
+
+      </div>
+
+      <!-- INFO BOX -->
+
+      <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5">
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+
+          Your leave request will be reviewed by the management team.
+          Once approved or rejected, you will receive an email notification.
+
+        </p>
+
+      </div>
+
+      <!-- ERROR -->
+
+      <p
+        id="error"
+        class="text-red-500 text-sm font-medium"
+      ></p>
+
+      <!-- BUTTONS -->
+
+      <div class="flex gap-4 pt-2">
+
+        <button
+          onclick="window.location.href='employee-dashboard.html'"
+          class="w-1/2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 py-3 rounded-2xl font-semibold transition"
+        >
+
+          Cancel
+
+        </button>
+
+        <button
+          onclick="applyLeave()"
+          class="w-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-2xl font-semibold shadow-md transition"
+        >
+
+          Apply Leave
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SUCCESS POPUP -->
+
+  <div
+    id="successPopup"
+    class="hidden fixed top-6 right-6 bg-white border border-green-200 shadow-xl rounded-2xl px-5 py-4 flex items-start gap-4 z-50"
+  >
+
+    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+
+      <span class="text-green-600 text-lg font-bold">
+
+        ✓
+
+      </span>
+
+    </div>
+
+    <div>
+
+      <h3 class="font-bold text-gray-800">
+
+        Leave Applied
+
+      </h3>
+
+      <p class="text-sm text-gray-500 mt-1">
+
+        You will be notified through email.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <script src="js/leave.js"></script>
+
+</body>
+
+</html>

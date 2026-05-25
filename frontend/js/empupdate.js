@@ -1,6 +1,6 @@
 protectPage();
 
-const EMPLOYEE_BASE =
+const BASE =
   "http://localhost:8080/employee";
 
 
@@ -64,7 +64,7 @@ async function loadEmployee() {
   try {
 
     const res = await fetch(
-      `${EMPLOYEE_BASE}/me`,
+      `${BASE}/me`,
       {
         headers: getHeaders()
       }
@@ -191,7 +191,7 @@ window.updateProfile =
     try {
 
       const res = await fetch(
-        `${EMPLOYEE_BASE}/me`,
+        `${BASE}/me`,
         {
           method: "PATCH",
 
@@ -217,7 +217,7 @@ window.updateProfile =
       setTimeout(() => {
 
         window.location.href =
-          "employee-dashboard.html";
+          "dashboard.html";
 
       }, 1500);
 
