@@ -11,7 +11,7 @@ window.save = async () => {
   };
 
   try {
-    const res = await fetch(BASE, {
+    const res = await fetch(ADMIN_BASE, {
       method: "POST",
       headers: getHeaders(true),
       body: JSON.stringify(emp)

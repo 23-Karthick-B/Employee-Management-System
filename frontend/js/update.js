@@ -7,12 +7,14 @@ const emailEl = document.getElementById("email");
 const deptEl = document.getElementById("dept");
 const phoneEl = document.getElementById("phone");
 const dobEl = document.getElementById("dod");
+const salaryEl = document.getElementById("salary");
 const errorEl = document.getElementById("error");
 const editName = document.getElementById("editName");
 const editEmail = document.getElementById("editEmail");
 const editDept = document.getElementById("editDept");
 const editPhone = document.getElementById("editPhone");
 const editDob = document.getElementById("editDob");
+const editSalary = document.getElementById("editSalary");
 
 function bindToggle(cb, input) {
 
@@ -35,6 +37,7 @@ bindToggle(editEmail, emailEl);
 bindToggle(editDept, deptEl);
 bindToggle(editPhone, phoneEl);
 bindToggle(editDob, dobEl);
+bindToggle(editSalary, salaryEl);
 
 loadEmployee();
 
@@ -42,7 +45,7 @@ async function loadEmployee() {
 
   try {
 
-    const res = await fetch(`${BASE}/${id}`, {
+    const res = await fetch(`${ADMIN_BASE}/${id}`, {
       headers: getHeaders(true)
     });
 
@@ -56,6 +59,7 @@ async function loadEmployee() {
     deptEl.value = emp.department || "";
     phoneEl.value = emp.phoneNumber || "";
     dobEl.value = emp.dod || "";
+    salaryEl.value = emp.salary || "";
 
   } catch (err) {
 
@@ -81,6 +85,10 @@ window.updateEmployee = async () => {
   if (editDob.checked)
     emp.dod = dobEl.value;
 
+  if (editSalary.checked)
+    emp.salary = salaryEl.value;
+
+
   if (Object.keys(emp).length === 0) {
 
     errorEl.innerText = "Select at least one field";
@@ -90,7 +98,7 @@ window.updateEmployee = async () => {
 
   try {
 
-    const res = await fetch(`${BASE}/${id}`, {
+    const res = await fetch(`${ADMIN_BASE}/${id}`, {
       method: "PATCH",
       headers: getHeaders(true),
       body: JSON.stringify(emp)

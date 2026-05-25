@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Employee Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 min-h-screen text-gray-800">
+
+  <!-- NAVBAR -->
+
+  <nav class="bg-white shadow-sm border-b border-gray-200">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <div>
+
+        <h1 class="text-2xl font-black tracking-tight">
+
+          Employee
+          <span class="text-blue-600">
+            Portal
+          </span>
+
+        </h1>
+
+        <p class="text-xs text-gray-400 tracking-[0.25em] uppercase mt-1">
+
+          Employee Dashboard
+
+        </p>
+
+      </div>
+
+      <div class="flex items-center gap-4">
+
+        <div class="text-right">
+
+          <p
+            id="employeeName"
+            class="font-bold text-sm"
+          >
+            Loading...
+          </p>
+
+          <p
+            id="employeeEmail"
+            class="text-xs text-gray-500"
+          >
+          </p>
+
+        </div>
+
+        <button
+          onclick="logout()"
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow"
+        >
+
+          Logout
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN -->
+
+  <div class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- WELCOME -->
+
+    <div class="mb-8">
+
+      <h2 class="text-4xl font-black tracking-tight">
+
+        Welcome Back 👋
+
+      </h2>
+
+      <p class="text-gray-500 mt-2">
+
+        Manage your profile and employee information
+
+      </p>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+      <!-- CARD -->
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+
+        <div class="flex items-center justify-between">
+
+          <div>
+
+            <p class="text-sm text-gray-500">
+
+              Department
+
+            </p>
+
+            <h3
+              id="department"
+              class="text-2xl font-black mt-2"
+            >
+              -
+            </h3>
+
+          </div>
+
+          <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl">
+
+            🏢
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+
+        <div class="flex items-center justify-between">
+
+          <div>
+
+            <p class="text-sm text-gray-500">
+
+              Salary
+
+            </p>
+
+            <h3
+              id="salary"
+              class="text-2xl font-black mt-2"
+            >
+              ₹0
+            </h3>
+
+          </div>
+
+          <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-2xl">
+
+            💰
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+
+        <div class="flex items-center justify-between">
+
+          <div>
+
+            <p class="text-sm text-gray-500">
+
+              Status
+
+            </p>
+
+            <h3 class="text-2xl font-black text-green-600 mt-2">
+
+              Active
+
+            </h3>
+
+          </div>
+
+          <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-2xl">
+
+            ✅
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PROFILE -->
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- PROFILE DETAILS -->
+
+      <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200">
+
+        <div class="px-6 py-5 border-b">
+
+          <h2 class="text-xl font-bold">
+
+            My Profile
+
+          </h2>
+
+          <p class="text-sm text-gray-500 mt-1">
+
+            Employee personal information
+
+          </p>
+
+        </div>
+
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Full Name
+
+            </label>
+
+            <p
+              id="profileName"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Email
+
+            </label>
+
+            <p
+              id="profileEmail"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Phone Number
+
+            </label>
+
+            <p
+              id="profilePhone"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Date Of Birth
+
+            </label>
+
+            <p
+              id="profileDob"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Department
+
+            </label>
+
+            <p
+              id="profileDepartment"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+          <div>
+
+            <label class="text-sm text-gray-500">
+
+              Salary
+
+            </label>
+
+            <p
+              id="profileSalary"
+              class="font-bold mt-1"
+            >
+              -
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- QUICK ACTIONS -->
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200">
+
+        <div class="px-6 py-5 border-b">
+
+          <h2 class="text-xl font-bold">
+
+            Quick Actions
+
+          </h2>
+
+        </div>
+
+        <div class="p-6 space-y-4">
+
+          <button
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow"
+          >
+
+            Download Payslip
+
+          </button>
+
+          <button
+            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold"
+          >
+
+            Apply Leave
+
+          </button>
+
+            <button
+            onclick="window.location.href='empUpdate.html'"
+            class="w-full border border-gray-300 hover:bg-gray-100 py-3 rounded-xl font-semibold"
+            >
+
+            Update Profile
+
+            </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/dashboard.js"></script>
+
+</body>
+
+</html>

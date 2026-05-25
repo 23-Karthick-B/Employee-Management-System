@@ -15,10 +15,10 @@ async function load() {
     let url = "";
 
     if (isSearching) {
-      url = `${BASE}/search?name=${encodeURIComponent(searchName)}&dept=${encodeURIComponent(searchDept)}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
+      url = `${ADMIN_BASE}/search?name=${encodeURIComponent(searchName)}&dept=${encodeURIComponent(searchDept)}&page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
 
     } else {
-      url =`${BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
+      url =`${ADMIN_BASE}?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
     }
 
     const res = await fetch(url,{
@@ -58,6 +58,7 @@ function render(list) {
         <td>${emp.email}</td>
         <td>${emp.department}</td>
         <td>${emp.phoneNumber}</td>
+        <td>${emp.salary}</td>
         <td>${formatDate(emp.dod)}</td>
 
         <td>
@@ -158,7 +159,7 @@ window.del = async (id) => {
   showDeleteModal(async () => {
 
     try {
-      const res = await fetch(`${BASE}/${id}`, {method: "DELETE",headers: getHeaders()});
+      const res = await fetch(`${ADMIN_BASE}/${id}`, {method: "DELETE",headers: getHeaders()});
 
       if (!res.ok)
         throw await res.json();
