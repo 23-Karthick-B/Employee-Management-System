@@ -18,7 +18,6 @@
 
 <body class="bg-gray-100 min-h-screen text-gray-800">
 
-  <!-- NAVBAR -->
 
   <nav class="bg-white shadow-sm border-b border-gray-200">
 
@@ -45,7 +44,6 @@
 
 <div class="flex items-center gap-4">
 
-  <!-- USER INFO -->
 
   <div class="text-right">
 
@@ -64,7 +62,6 @@
 
   </div>
 
-  <!-- LOGOUT BUTTON -->
 
   <button
     onclick="openLogoutModal()"
@@ -80,11 +77,9 @@
 
   </nav>
 
-  <!-- MAIN -->
 
   <div class="max-w-7xl mx-auto px-6 py-8">
 
-    <!-- WELCOME -->
 
     <div class="mb-8">
 
@@ -102,11 +97,8 @@
 
     </div>
 
-    <!-- STATS -->
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-      <!-- CARD -->
 
       <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
 
@@ -139,7 +131,6 @@
 
       </div>
 
-      <!-- CARD -->
 
       <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
 
@@ -172,7 +163,6 @@
 
       </div>
 
-      <!-- CARD -->
 
       <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
 
@@ -206,11 +196,7 @@
 
     </div>
 
-    <!-- PROFILE + ACTIONS -->
-
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-      <!-- PROFILE DETAILS -->
 
       <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200">
 
@@ -326,7 +312,6 @@
 
       </div>
 
-      <!-- QUICK ACTIONS -->
 
       <div class="bg-white rounded-2xl shadow-sm border border-gray-200">
 
@@ -374,8 +359,6 @@
 
   </div>
 
-  <!-- LOGOUT MODAL -->
-
   <div
     id="logoutModal"
     class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
@@ -418,16 +401,10 @@
 
   </div>
 
-  <!-- JS FILES -->
-
   <script src="./js/api.js"></script>
   <script src="./js/dashboard.js"></script>
 
-  <!-- LOGOUT SCRIPT -->
-
   <script>
-
-    // Protect Dashboard
 
     const token = localStorage.getItem("token");
 
@@ -437,8 +414,6 @@
 
     }
 
-    // Open Modal
-
     function openLogoutModal() {
 
       document
@@ -447,8 +422,6 @@
 
     }
 
-    // Close Modal
-
     function closeLogoutModal() {
 
       document
@@ -456,8 +429,6 @@
         .classList.add("hidden");
 
     }
-
-    // Logout
 
     function logout() {
 
