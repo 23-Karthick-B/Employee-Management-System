@@ -328,7 +328,9 @@
         <div class="p-6 space-y-4">
 
           <button
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow">
+            onclick="downloadPayslip()"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow"
+          >
 
             Download Payslip
 
@@ -403,6 +405,8 @@
 
   <script src="./js/api.js"></script>
   <script src="./js/dashboard.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="./js/payslip.js"></script>
 
   <script>
 
@@ -440,6 +444,7 @@
     }
 
   </script>
+
 
 </body>
 
