@@ -1,8 +1,8 @@
 # Employee Management System (EMS)
 
-A modern full-stack Employee Management System built to simplify employee administration, authentication, leave handling, and payroll management.
+A full stack Employee Management System built to simplify employee administration, authentication, leave handling, and payroll management.
 
-The application provides separate dashboards and permissions for Admins and Employees with secure JWT-based authentication and a clean responsive UI.
+The application provides separate dashboards and permissions for Admins and Employees with secure JWT based authentication and a clean responsive UI.
 
 ---
 
