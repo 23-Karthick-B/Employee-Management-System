@@ -26,30 +26,25 @@ public class AdminLeaveController {
    @Autowired
    private EmployeeRepository employeeRepository;
 
-   @GetMapping
-   public List<LeaveResponseDto> getAllLeaves() {
+   @GetMapping("/pending")
+   public List<LeaveResponseDto> getPendingLeaves() {
 
-      List<EmployeeLeave> leaves = leaveRepository.findAll();
+      List<EmployeeLeave> leaves = leaveRepository.findByStatus("PENDING");
 
-      List<LeaveResponseDto> response = new ArrayList<>();
+      List<LeaveResponseDto> response =new ArrayList<>();
 
       for (EmployeeLeave leave : leaves) {
 
-         Employee employee = employeeRepository.findById(leave.getEmployeeId()).orElse(null);
+         Employee employee =employeeRepository.findById(leave.getEmployeeId()).orElse(null);
 
          LeaveResponseDto dto = new LeaveResponseDto();
 
          dto.setId(leave.getId());
-
-         dto.setEmployeeId(leave.getEmployeeId());
-
-         dto.setLeaveDate(leave.getLeaveDate());
-
-         dto.setReason(leave.getReason());
-
+         dto.setEmployeeId( leave.getEmployeeId());
+         dto.setLeaveDate( leave.getLeaveDate());
+         dto.setReason( leave.getReason());
          dto.setStatus(leave.getStatus());
-
-         dto.setAppliedAt(leave.getAppliedAt());
+         dto.setAppliedAt( leave.getAppliedAt());
 
          if (employee != null) {
 

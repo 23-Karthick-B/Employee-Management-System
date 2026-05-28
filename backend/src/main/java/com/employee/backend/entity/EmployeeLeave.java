@@ -33,4 +33,56 @@ public class EmployeeLeave {
    @Column(name = "AppliedAt")
    private LocalDateTime appliedAt;
 
+   public EmployeeLeave(){
+
+   }
+
+   public Integer getId() {
+      return id;
+   }
+
+   public void setId(Integer id) {
+      this.id = id;
+   }
+
+   public Integer getEmployeeId() {
+      return employeeId;
+   }
+
+   public void setEmployeeId(Integer employeeId) {
+      this.employeeId = employeeId;
+   }
+
+   public LocalDate getLeaveDate() {
+      return leaveDate;
+   }
+
+   public void setLeaveDate(LocalDate leaveDate) {
+      this.leaveDate = leaveDate;
+   }
+
+   public String getReason() {
+      return reason;
+   }
+
+   public void setReason(String reason) {
+      this.reason = reason;
+   }
+
+   public String getStatus() {
+      return status;
+   }
+
+   public void setStatus(String status) {
+      this.status = status;
+   }
+
+   public LocalDateTime getAppliedAt() {
+      return appliedAt;
+   }
+
+   public void setAppliedAt(LocalDateTime appliedAt) {
+      this.appliedAt = appliedAt;
+   }
+   
 }
