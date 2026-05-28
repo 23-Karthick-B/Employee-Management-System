@@ -1,3 +1,4 @@
+protectPage();
 async function applyLeave() {
 
   const leaveDate = document.getElementById("leaveDate").value;

@@ -1,3 +1,4 @@
+protectPage();
 const BASE = "http://localhost:8080/api/admin/leave/pending";
 loadLeaves();
 

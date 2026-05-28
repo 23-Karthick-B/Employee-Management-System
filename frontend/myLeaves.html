@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    My Leave Requests
+  </title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-slate-100 to-blue-50 min-h-screen">
+
+  <nav class="bg-white border-b border-gray-200 shadow-sm">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <div>
+
+        <h1 class="text-3xl font-black tracking-tight text-gray-800">
+
+          My
+          <span class="text-blue-600">
+            Leaves
+          </span>
+
+        </h1>
+
+        <p class="text-xs uppercase tracking-[0.25em] text-gray-400 mt-1">
+
+          Employee Leave Requests
+
+        </p>
+
+      </div>
+
+      <button
+        onclick="window.location.href='dashboard.html'"
+        class="bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-xl font-semibold text-sm transition"
+      >
+
+        Back
+
+      </button>
+
+    </div>
+
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-6 py-8">
+
+    <div
+      id="emptyState"
+      class="hidden bg-white rounded-3xl border border-gray-200 shadow-sm p-12 text-center"
+    >
+
+      <div class="text-6xl mb-4">
+        📭
+      </div>
+
+      <h2 class="text-2xl font-black text-gray-800">
+
+        No Leave Requests
+
+      </h2>
+
+      <p class="text-gray-500 mt-2">
+
+        You haven't applied for any leave yet.
+
+      </p>
+
+    </div>
+
+    <div
+      id="leaveContainer"
+      class="grid grid-cols-1 lg:grid-cols-2 gap-6"
+    >
+    </div>
+
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/myLeaves.js"></script>
+
+</body>
+
+</html>
