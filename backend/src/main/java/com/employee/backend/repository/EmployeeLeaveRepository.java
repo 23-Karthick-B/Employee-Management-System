@@ -8,4 +8,5 @@ import com.employee.backend.entity.EmployeeLeave;
 
 public interface EmployeeLeaveRepository extends JpaRepository<EmployeeLeave,Integer> {
    List<EmployeeLeave> findByStatus(String status);
+   List<EmployeeLeave> findByEmployeeId(Integer employeeId);
 }

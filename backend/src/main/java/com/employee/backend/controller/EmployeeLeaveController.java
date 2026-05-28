@@ -1,9 +1,11 @@
 package com.employee.backend.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,5 +41,15 @@ public class EmployeeLeaveController {
       leave.setAppliedAt(LocalDateTime.now());
       leaveRepository.save(leave);
       return "Leave Applied Succesfully!";
+   }
+
+   @GetMapping("/my-leaves")
+   public List<EmployeeLeave> getMyLeaves(Authentication authentication) {
+
+      String email =authentication.getName();
+
+      Employee employee = employeeRepository.findByEmailAndIsActiveTrue(email).orElseThrow();
+
+      return leaveRepository .findByEmployeeId(employee.getId());
    }
 }
