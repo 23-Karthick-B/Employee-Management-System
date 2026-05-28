@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Leave Requests
+  </title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
+
+  <nav class="bg-white/90 backdrop-blur-lg border-b border-gray-200 shadow-sm sticky top-0 z-40">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <div>
+
+        <h1 class="text-3xl font-black tracking-tight text-gray-800">
+
+          Leave
+          <span class="text-blue-600">
+            Requests
+          </span>
+
+        </h1>
+
+        <p class="text-xs uppercase tracking-[0.25em] text-gray-400 mt-1">
+
+          Admin Approval Panel
+
+        </p>
+
+      </div>
+
+      <button
+        onclick="window.location.href='index.html'"
+        class="
+          bg-white
+          border border-gray-200
+          hover:bg-gray-100
+          px-5 py-2.5
+          rounded-xl
+          font-semibold
+          text-sm
+          shadow-sm
+          transition
+        "
+      >
+
+        ← Back
+
+      </button>
+
+    </div>
+
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-6 py-8">
+
+    <div
+      id="emptyState"
+      class="
+        hidden
+        bg-white
+        rounded-3xl
+        border border-gray-200
+        shadow-sm
+        p-14
+        text-center
+      "
+    >
+
+      <div class="text-6xl mb-4">
+        🎉
+      </div>
+
+      <h2 class="text-3xl font-black text-gray-800">
+
+        No Pending Leaves
+
+      </h2>
+
+      <p class="text-gray-500 mt-3 text-lg">
+
+        All leave requests are processed.
+
+      </p>
+
+    </div>
+
+    <div
+      id="leaveContainer"
+      class="
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        xl:grid-cols-3
+        gap-5
+      "
+    >
+    </div>
+
+  </div>
+
+  <div
+    id="successPopup"
+    class="
+      hidden
+      fixed
+      top-6
+      right-6
+      bg-white
+      border border-green-200
+      shadow-2xl
+      rounded-2xl
+      px-5 py-4
+      flex items-start gap-4
+      z-50
+      animate-pulse
+    "
+  >
+
+    <div class="
+      w-10 h-10
+      rounded-full
+      bg-green-100
+      flex items-center justify-center
+    ">
+
+      <span class="text-green-600 text-lg font-bold">
+
+        ✓
+
+      </span>
+
+    </div>
+
+    <div>
+
+      <h3
+        class="font-bold text-gray-800"
+      >
+
+        Success
+
+      </h3>
+
+      <p
+        id="popupMessage"
+        class="text-sm text-gray-500 mt-1"
+      >
+      </p>
+
+    </div>
+
+  </div>
+
+  <script src="js/leaveRequests.js"></script>
+
+</body>
+
+</html>
